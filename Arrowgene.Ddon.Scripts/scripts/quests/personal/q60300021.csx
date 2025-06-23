@@ -2,7 +2,7 @@
  * @brief To the Heroic Spirit Sleeping Path Feryana District
  */
 
-#load "C:\Users\Paul\Git\Arrowgene.DragonsDogmaOnline\Arrowgene.Ddon.Cli\bin\Debug\net9.0\Files\Assets\scripts\libs.csx"
+#load "libs.csx"
 
 public class ScriptedQuest : IQuest
 {
