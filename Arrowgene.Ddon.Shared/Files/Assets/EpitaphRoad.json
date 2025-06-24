@@ -2026,7 +2026,7 @@
                         "group_id": 214
                     },
                     "pos_id": 0,
-                    "drop_tables": [ 6, 1 ]
+                    "drop_tables": [ [ 6, 1 ] ]
                 },
                 {
                     "comment": "Gold Chest (Ruins)",
@@ -2036,7 +2036,7 @@
                         "group_id": 215
                     },
                     "pos_id": 0,
-                    "drop_tables": [ 6, 1 ]
+                    "drop_tables": [ [ 6, 1 ] ]
                 },
                 {
                     "comment": "Gold Chest (Ruins)",
@@ -2046,7 +2046,7 @@
                         "group_id": 217
                     },
                     "pos_id": 0,
-                    "drop_tables": [ 6, 1 ]
+                    "drop_tables": [ [ 6, 1 ] ]
                 },
                 {
                     "comment": "Bronze Chest (Ruins)",
@@ -2126,7 +2126,7 @@
                         "group_id": 214
                     },
                     "pos_id": 0,
-                    "drop_tables": [ 6, 2 ]
+                    "drop_tables": [ [ 6, 2 ] ]
                 },
                 {
                     "comment": "Gold Chest (Well)",
@@ -2136,7 +2136,7 @@
                         "group_id": 215
                     },
                     "pos_id": 0,
-                    "drop_tables": [ 6, 2 ]
+                    "drop_tables": [ [ 6, 2 ] ]
                 },
                 {
                     "comment": "Gold Chest (Well)",
@@ -2146,7 +2146,7 @@
                         "group_id": 217
                     },
                     "pos_id": 0,
-                    "drop_tables": [ 6, 2 ]
+                    "drop_tables": [ [ 6, 2 ] ]
                 },
                 {
                     "comment": "Bronze Chest (Well)",
@@ -2226,7 +2226,7 @@
                         "group_id": 214
                     },
                     "pos_id": 0,
-                    "drop_tables": [ 6, 3 ]
+                    "drop_tables": [ [ 6, 3 ] ]
                 },
                 {
                     "comment": "Gold Chest (Tomb)",
@@ -2246,7 +2246,7 @@
                         "group_id": 215
                     },
                     "pos_id": 0,
-                    "drop_tables": [ 6, 3 ]
+                    "drop_tables": [ [ 6, 3 ] ]
                 },
                 {
                     "comment": "Gold Chest (Tomb)",
@@ -2256,7 +2256,7 @@
                         "group_id": 217
                     },
                     "pos_id": 0,
-                    "drop_tables": [ 6, 3 ]
+                    "drop_tables": [ [ 6, 3 ] ]
                 },
                 {
                     "comment": "Bronze Chest (Tomb)",
@@ -2336,7 +2336,7 @@
                         "group_id": 214
                     },
                     "pos_id": 0,
-                    "drop_tables": [ 6, 3 ]
+                    "drop_tables": [ [ 6, 3 ] ]
                 },
                 {
                     "comment": "Gold Chest (Ruin Depths)",
@@ -2356,7 +2356,7 @@
                         "group_id": 215
                     },
                     "pos_id": 0,
-                    "drop_tables": [ 6, 3 ]
+                    "drop_tables": [ [ 6, 3 ] ]
                 },
                 {
                     "comment": "Gold Chest (Ruin Depths)",
@@ -2366,7 +2366,7 @@
                         "group_id": 217
                     },
                     "pos_id": 0,
-                    "drop_tables": [ 6, 3 ]
+                    "drop_tables": [ [ 6, 3 ] ]
                 },
                 {
                     "comment": "Gold Chest (Final Trial)",
