@@ -83,14 +83,6 @@
                             "exp_scheme": "Automatic",
                             "named_enemy_params_id": 2286,
                             "infection_type": 1
-                        },
-                        {
-                            "comment": "War-Ready Grimwarg",
-                            "enemy_id": "0x010230",
-                            "level": 88,
-                            "exp_scheme": "Automatic",
-                            "named_enemy_params_id": 2286,
-                            "infection_type": 1
                         }
                     ]
                 }
