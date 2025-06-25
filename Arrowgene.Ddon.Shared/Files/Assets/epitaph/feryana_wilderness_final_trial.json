@@ -4,7 +4,7 @@
         "id": 556,
         "group_id": 84
     },
-    "pos_id": 7,
+    "pos_id": 0,
     "unlock_cost": [],
     "unlocks": [
         {"stage_id": 556, "group_id": 136, "pos_id": 0}
