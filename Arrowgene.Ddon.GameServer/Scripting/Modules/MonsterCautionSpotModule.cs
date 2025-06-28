@@ -1,9 +1,12 @@
 using Arrowgene.Ddon.GameServer.Characters;
+using Arrowgene.Ddon.GameServer.Party;
 using Arrowgene.Ddon.GameServer.Scripting.Interfaces;
+using Arrowgene.Ddon.Shared.Model;
 using Arrowgene.Ddon.Shared.Model.Quest;
 using Microsoft.CodeAnalysis.Scripting;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Arrowgene.Ddon.GameServer.Scripting
 {
@@ -19,6 +22,23 @@ namespace Arrowgene.Ddon.GameServer.Scripting
         public MonsterCautionSpotModule()
         {
             EnemyGroups = new Dictionary<QuestAreaId, List<IMonsterSpotInfo>>();
+        }
+
+        public bool IsEnabledCautionSpotGroup(DdonGameServer server, PartyGroup party, StageLayoutId stageLayoutId, QuestAreaId areaId)
+        {
+            if (party.Leader == null || !EnemyGroups.ContainsKey(areaId))
+            {
+                return false;
+            }
+
+            var cautionSpot = EnemyGroups[areaId].Where(x => x.StageLayoutId.Equals(stageLayoutId)).FirstOrDefault();
+            if (cautionSpot == null || !cautionSpot.CautionPlayer)
+            {
+                return false;
+            }
+
+            var leaderClient = party.Leader.Client;
+            return server.AreaRankManager.GetEffectiveRank(leaderClient.Character, areaId) >= cautionSpot.RequiredAreaRank;
         }
 
         public override bool EvaluateResult(string path, ScriptState<object> result)
