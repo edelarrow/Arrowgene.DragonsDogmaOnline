@@ -270,6 +270,11 @@ namespace Arrowgene.Ddon.GameServer.Handler
                                 var ntcs = _gameServer.ExpManager.AddExp(memberClient, memberCharacter, pawnExp, RewardSource.Enemy, connectionIn: connectionIn);
                                 queuedPackets.AddRange(ntcs);
                             }
+
+                            if (pawn is RentalPawn rentalPawn)
+                            {
+                                Server.RentalPawnManager.HandleEnemyKill(rentalPawn, connectionIn);
+                            }
                         }
                         else
                         {

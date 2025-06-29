@@ -1502,5 +1502,112 @@ namespace Arrowgene.Ddon.Server.Settings
             }
         }
         private const bool _PawnSkipJobTraining = true;
+        private const bool _PawnSkipJobTraining = false;
+
+        /// <summary>
+        /// The number of adventure charges that a support pawn has when hired.
+        /// Other pieces of the UI seemingly expect this to be 10, but it may be more flexible.
+        /// </summary>
+        [DefaultValue(_RentalPawnAdventureCount)]
+        public byte RentalPawnAdventureCount
+        {
+            set
+            {
+                SetSetting("RentalPawnAdventureCount", value);
+            }
+            get
+            {
+                return TryGetSetting("RentalPawnAdventureCount", _RentalPawnAdventureCount);
+            }
+        }
+        private const byte _RentalPawnAdventureCount = 10;
+
+        /// <summary>
+        /// The number of crafting charges that a support pawn has when hired.
+        /// Other pieces of the UI seemingly expect this to be 5, but it may be more flexible.
+        /// </summary>
+        [DefaultValue(_RentalPawnCraftCount)]
+        public byte RentalPawnCraftCount
+        {
+            set
+            {
+                SetSetting("RentalPawnCraftCount", value);
+            }
+            get
+            {
+                return TryGetSetting("RentalPawnCraftCount", _RentalPawnCraftCount);
+            }
+        }
+        private const byte _RentalPawnCraftCount = 10;
+
+        /// <summary>
+        /// Time, in seconds, that a support pawn must be adventuring before it loses one of its adventuring charges.
+        /// By default, 1350 seconds = 22.5 minutes, or 6 hours Lestanian time.
+        /// </summary>
+        [DefaultValue(_RentalPawnAdventureTimer)]
+        public uint RentalPawnAdventureTimer
+        {
+            set
+            {
+                SetSetting("RentalPawnAdventureTimer", value);
+            }
+            get
+            {
+                return TryGetSetting("RentalPawnAdventureTimer", _RentalPawnAdventureTimer);
+            }
+        }
+        private const uint _RentalPawnAdventureTimer = 1350;
+
+        /// <summary>
+        /// If true, active rental pawn timers are automatically reset upon returning to a safe area, even if the instance wouldn't normally reset.
+        /// This is a QOL feature, since removing and readding them to the party would reset the timer anyways.
+        /// </summary>
+        [DefaultValue(_RentalPawnAdventureTimerAutoReset)]
+        public bool RentalPawnAdventureTimerAutoReset
+        {
+            set
+            {
+                SetSetting("RentalPawnAdventureTimerAutoReset", value);
+            }
+            get
+            {
+                return TryGetSetting("RentalPawnAdventureTimerAutoReset", _RentalPawnAdventureTimerAutoReset);
+            }
+        }
+        private const bool _RentalPawnAdventureTimerAutoReset = false;
+
+        /// <summary>
+        /// If true, rental pawns will consume an adventure charge when starting an EXM, but won't have their usual adventure timer running.
+        /// </summary>
+        [DefaultValue(_RentalPawnAdventureConsumeOnEXM)]
+        public bool RentalPawnAdventureConsumeOnEXM
+        {
+            set
+            {
+                SetSetting("RentalPawnAdventureConsumeOnEXM", value);
+            }
+            get
+            {
+                return TryGetSetting("RentalPawnAdventureConsumeOnEXM", _RentalPawnAdventureConsumeOnEXM);
+            }
+        }
+        private const bool _RentalPawnAdventureConsumeOnEXM = true;
+
+        /// <summary>
+        /// The number of rental points (RP), gained by renting and returning pawns, required to buy one JP for a pawn.
+        /// </summary>
+        [DefaultValue(_RentalPointConversionRate)]
+        public uint RentalPointConversionRate
+        {
+            set
+            {
+                SetSetting("RentalPointConversionRate", value);
+            }
+            get
+            {
+                return TryGetSetting("RentalPointConversionRate", _RentalPointConversionRate);
+            }
+        }
+        private const uint _RentalPointConversionRate = 10;
     }
 }

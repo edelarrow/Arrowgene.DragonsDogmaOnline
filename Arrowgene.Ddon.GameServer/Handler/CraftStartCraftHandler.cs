@@ -1,7 +1,9 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using Arrowgene.Ddon.Database.Model;
 using Arrowgene.Ddon.GameServer.Characters;
 using Arrowgene.Ddon.Server;
 using Arrowgene.Ddon.Server.Network;
@@ -165,14 +167,23 @@ namespace Arrowgene.Ddon.GameServer.Handler
                     craftProgress.BonusExp = 0;
                 }
 
+                foreach (CraftPawn p in craftPawns)
+                {
+                    if (p.Pawn is RentalPawn rentalPawn)
+                    {
+                        Server.RentalPawnManager.HandleCraftCountDecrement(rentalPawn, connection);
+                    }
+                }
+
                 Server.Database.InsertPawnCraftProgress(craftProgress, connection);
                 foreach (CraftPawn pawn in craftPawns)
                 {
                     if (pawn.Pawn != null)
                     {
-                        pawn.Pawn.PawnState = PawnState.Craft;
                         if (pawn.Pawn.PawnType == PawnType.Main)
                         {
+                            // Only main pawns need their status tracked persistently.
+                            pawn.Pawn.PawnState = PawnState.Craft;
                             Server.Database.UpdatePawnBaseInfo(pawn.Pawn, connection);
                         }
                     }
