@@ -3,7 +3,6 @@ using Arrowgene.Ddon.GameServer.Party;
 using Arrowgene.Ddon.GameServer.Scripting.Interfaces;
 using Arrowgene.Ddon.Shared.Model;
 using Arrowgene.Ddon.Shared.Model.Quest;
-using Microsoft.CodeAnalysis.Scripting;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -41,14 +40,14 @@ namespace Arrowgene.Ddon.GameServer.Scripting
             return server.AreaRankManager.GetEffectiveRank(leaderClient.Character, areaId) >= cautionSpot.RequiredAreaRank;
         }
 
-        public override bool EvaluateResult(string path, ScriptState<object> result)
+        public override bool EvaluateResult(string path, object result, IDictionary<string, object> variables)
         {
             if (result == null)
             {
                 return false;
             }
 
-            IMonsterSpotInfo spotInfo = (IMonsterSpotInfo)result.ReturnValue;
+            IMonsterSpotInfo spotInfo = (IMonsterSpotInfo)result;
             if (spotInfo == null)
             {
                 return false;
