@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +25,7 @@ namespace Arrowgene.Ddon.Shared.Scripting
 
         protected Dictionary<string, ScriptModule> ScriptModules { get; private set; }
         public string ScriptsRoot { get; private set; }
+        public string HashPath { get; private set; }
         public string LibsRoot { get; private set; } = string.Empty;
         public T GlobalVariables { get; protected set; }
         public List<string> PathsToIgnore { get; protected set; }
@@ -33,15 +35,16 @@ namespace Arrowgene.Ddon.Shared.Scripting
         {
             ScriptModules = new Dictionary<string, ScriptModule>();
             ScriptsRoot = Path.Combine(assetsPath, "scripts");
+            HashPath = Path.GetFullPath(Path.Combine(ScriptsRoot, "../../script_assemblies/hashes.csv"));
+
             PathsToIgnore = new List<string>();
 
             ScriptHashes = [];
-            var hashPath = Path.GetFullPath(Path.Combine(ScriptsRoot, "../../script_assemblies/hashes.csv"));
-            if (File.Exists(hashPath))
+            if (File.Exists(HashPath))
             {
                 try
                 {
-                    ScriptHashes = new(new ScriptHashReader().ReadPath(hashPath).ToDictionary(k => k.ScriptPath, v => (v.DllPath, v.Hash)));
+                    ScriptHashes = new(new ScriptHashReader().ReadPath(HashPath).ToDictionary(k => k.ScriptPath, v => (v.DllPath, v.Hash)));
                 }
                 catch { }
             }
@@ -115,52 +118,16 @@ namespace Arrowgene.Ddon.Shared.Scripting
             {
                 Logger.Info(path);
 
-                var code = Util.ReadAllText(path);
-
+#if DEBUG
                 using var stream = File.OpenRead(path);
                 var hash = stream.GetHash<MD5>();
-#if DEBUG
-                try
+                if (await RestoreScriptFromStoredDll(module, path, hash))
                 {
-                    if (ScriptHashes.TryGetValue(path, out var pastResult))
-                    {
-                        if (pastResult.Hash == hash)
-                        {
-                            var assembly = Assembly.LoadFile(pastResult.DllPath);
-                            var type = assembly.GetType("Submission#0");
-                            var factory = type.GetMethod("<Factory>");
-                            var submissionArray = new object[2];
-                            Task<object> task = (Task<object>)factory.Invoke(null, [submissionArray]);
-                            await task;
-
-                            Dictionary<string, object> dllVariables = [];
-                            foreach (var member in type.GetMembers())
-                            {
-                                if (member is FieldInfo fieldInfo)
-                                {
-                                    object value = fieldInfo.GetValue(submissionArray[1]);
-                                    if (value is not null)
-                                    {
-                                        dllVariables.Add(fieldInfo.Name, value);
-                                    }
-                                }
-                            }
-
-                            if (!module.EvaluateResult(path, task.Result, dllVariables))
-                            {
-                                throw new Exception("Failed to evaluate the result of executing a stored DLL.");
-                            }
-                            return;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error($"Failed to restore hashed assembly for '{path}', doing a fresh compilation.");
-                    Logger.Error(ex.ToString());
+                    return;
                 }
 #endif
 
+                var code = Util.ReadAllText(path);
                 var options = module.Options()
 #if DEBUG
                     .WithFilePath(path)
@@ -193,6 +160,7 @@ namespace Arrowgene.Ddon.Shared.Scripting
                     Logger.Error($"Failed to evaluate the result of executing '{path}'");
                 }
 #if DEBUG       
+                // Flag to prevent script cacheing.
                 else if (!variables.ContainsKey("PREVENT_SCRIPT_CACHE"))
                 {
                     ScriptHashes[path] = (EmitScriptAsDllPath(module, path).OutputPath, hash);
@@ -419,14 +387,58 @@ namespace Arrowgene.Ddon.Shared.Scripting
             try
             {
                 var hashes = ScriptHashes.Select(x => $"{x.Key},{x.Value.DllPath},{x.Value.Hash}").ToArray();
-                var path = Path.GetFullPath(Path.Combine(ScriptsRoot, "../../script_assemblies/hashes.csv"));
-                File.WriteAllLines(path, hashes);
+                File.WriteAllLines(HashPath, hashes);
             }
             catch (Exception ex)
             {
                 Logger.Error("Error when writing script hashes to file.");
                 Logger.Error(ex.ToString());
             }
+        }
+
+        private async Task<bool> RestoreScriptFromStoredDll(ScriptModule module, string path, string hash)
+        {
+            try
+            {
+                if (ScriptHashes.TryGetValue(path, out var pastResult))
+                {
+                    if (pastResult.Hash == hash)
+                    {
+                        var assembly = Assembly.LoadFile(pastResult.DllPath);
+                        var type = assembly.GetType("Submission#0");
+                        var factory = type.GetMethod("<Factory>");
+                        var submissionArray = new object[2];
+                        Task<object> task = (Task<object>)factory.Invoke(null, [submissionArray]);
+                        await task;
+
+                        Dictionary<string, object> variables = [];
+                        foreach (var member in type.GetMembers())
+                        {
+                            if (member is FieldInfo fieldInfo)
+                            {
+                                object value = fieldInfo.GetValue(submissionArray[1]);
+                                if (value is not null)
+                                {
+                                    variables.Add(fieldInfo.Name, value);
+                                }
+                            }
+                        }
+
+                        if (!module.EvaluateResult(path, task.Result, variables))
+                        {
+                            throw new Exception("Failed to evaluate the result of executing a stored DLL.");
+                        }
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"Failed to restore stored DLL for '{path}', doing a fresh compilation.");
+                Logger.Error(ex.ToString());
+                return false;
+            }
+            return false;
         }
 
         private class ScriptHashReader : CsvReaderWriter<(string ScriptPath, string DllPath, string Hash)>
