@@ -28,7 +28,11 @@ namespace Arrowgene.Ddon.GameServer.Handler
             // but its fine to return the normal gamemode result no matter what because the BBM character can't interact with abilities/augments.
 
             S2CSkillGetAcquirableAbilityListRes response = new S2CSkillGetAcquirableAbilityListRes();
-            if (request.Job != 0)
+            if (request.CharacterId != 0 && Server.GameSettings.GameServerSettings.PawnSkipJobTraining)
+            {
+                response.AbilityParamList = SkillData.AllAbilities.Where(x => x.Job == request.Job).ToList();
+            }
+            else if (request.Job != 0)
             {
                 response.AbilityParamList = client.Character.AcquirableAbilities[request.Job]
                         .Where(x => !SkillData.IsUnlockableAbility(request.Job, x.AbilityNo, 1) || IsAbilityUnlocked(client.Character, request.Job, x.AbilityNo))

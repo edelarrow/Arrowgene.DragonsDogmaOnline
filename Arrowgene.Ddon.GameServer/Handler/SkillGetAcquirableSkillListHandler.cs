@@ -1,3 +1,4 @@
+using System.Linq;
 using Arrowgene.Ddon.Server;
 using Arrowgene.Ddon.Shared.Entity.PacketStructure;
 using Arrowgene.Ddon.Shared.Model;
@@ -16,10 +17,21 @@ namespace Arrowgene.Ddon.GameServer.Handler
         public override S2CSkillGetAcquirableSkillListRes Handle(GameClient client, C2SSkillGetAcquirableSkillListReq request)
         {
             // This list can't be filtered based on progress because it's cached between BBM and normal gameplay.
-            return new S2CSkillGetAcquirableSkillListRes()
+            //CharacterId = 0 in the request is for the player
+            if (request.CharacterId == 0 || Server.GameSettings.GameServerSettings.PawnSkipJobTraining == false)
             {
-                SkillParamList = client.Character.AcquirableSkills[request.Job]
-            };
+                return new S2CSkillGetAcquirableSkillListRes()
+                {
+                    SkillParamList = client.Character.AcquirableSkills[request.Job]
+                };
+            }
+            else 
+            {
+                return new S2CSkillGetAcquirableSkillListRes()
+                {
+                    SkillParamList = SkillData.AllSkills.Where(x => x.Job == request.Job).ToList()
+                };
+            }
         }
     }
 }

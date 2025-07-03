@@ -1483,5 +1483,23 @@ namespace Arrowgene.Ddon.Server.Settings
             }
         }
         private const bool _EnableHighOrbConversion = true;
+
+        /// <summary>
+        /// When set to true, allows pawns to bypass Job Training requirements
+        /// and learn any skill or augment they otherwise meet the requirements of.
+        /// </summary>
+        [DefaultValue(_PawnSkipJobTraining)]
+        public bool PawnSkipJobTraining
+        {
+            set
+            {
+                SetSetting("PawnSkipJobTraining", value);
+            }
+            get
+            {
+                return TryGetSetting("PawnSkipJobTraining", _PawnSkipJobTraining);
+            }
+        }
+        private const bool _PawnSkipJobTraining = true;
     }
 }
