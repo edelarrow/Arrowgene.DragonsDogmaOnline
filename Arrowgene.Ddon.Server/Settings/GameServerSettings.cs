@@ -836,6 +836,24 @@ namespace Arrowgene.Ddon.Server.Settings
         private const bool _EnableAreaRankSpotLocks = true;
 
         /// <summary>
+        /// Confgures the amount of AP to be rewarded when clearing an area or dungeon boss
+        /// in the normal game mode.
+        /// </summary>
+        [DefaultValue(_AreaBossApReward)]
+        public uint AreaBossApReward
+        {
+            set
+            {
+                SetSetting("AreaBossApReward", value);
+            }
+            get
+            {
+                return TryGetSetting("AreaBossApReward", _AreaBossApReward);
+            }
+        }
+        private const uint _AreaBossApReward = 500;
+
+        /// <summary>
         /// Configures the chance that various gathering tools can break
         /// when the player performs a gathering action.
         /// </summary>
