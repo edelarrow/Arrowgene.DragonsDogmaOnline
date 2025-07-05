@@ -121,7 +121,7 @@ namespace Arrowgene.Ddon.Shared.Scripting
                 using (FileStream stream = new(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
                     hash = stream.GetHash<MD5>();
-                    if (await RestoreScriptFromStoredDll(module, path, hash))
+                    if (RestoreScriptFromStoredDll(module, path, hash))
                     {
                         return;
                     }
@@ -407,7 +407,7 @@ namespace Arrowgene.Ddon.Shared.Scripting
             }
         }
 
-        private async Task<bool> RestoreScriptFromStoredDll(ScriptModule module, string path, string hash)
+        private bool RestoreScriptFromStoredDll(ScriptModule module, string path, string hash)
         {
             try
             {
