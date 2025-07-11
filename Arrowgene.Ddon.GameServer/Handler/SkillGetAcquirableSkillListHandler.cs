@@ -3,6 +3,7 @@ using Arrowgene.Ddon.Server;
 using Arrowgene.Ddon.Shared.Entity.PacketStructure;
 using Arrowgene.Ddon.Shared.Model;
 using Arrowgene.Logging;
+using static Arrowgene.Ddon.Server.Network.Challenge;
 
 namespace Arrowgene.Ddon.GameServer.Handler
 {
@@ -27,9 +28,14 @@ namespace Arrowgene.Ddon.GameServer.Handler
             }
             else 
             {
+                var allDefaultSkills = SkillData.AllSkills.Where(x => x.Job == request.Job && !SkillData.IsUnlockableSkill(request.Job, x.SkillNo, 1));
+                var pawnUnlocks = SkillData.AllSkills.Where(x => x.Job == request.Job
+                    && SkillData.IsUnlockableSkill(request.Job, x.SkillNo, 1)
+                    && client.Character.LearnedCustomSkills.Any(y => x.SkillNo == y.SkillId)
+                    );
                 return new S2CSkillGetAcquirableSkillListRes()
                 {
-                    SkillParamList = SkillData.AllSkills.Where(x => x.Job == request.Job).ToList()
+                    SkillParamList = allDefaultSkills.Concat(pawnUnlocks).ToList()
                 };
             }
         }
