@@ -30,7 +30,12 @@ namespace Arrowgene.Ddon.GameServer.Handler
             S2CSkillGetAcquirableAbilityListRes response = new S2CSkillGetAcquirableAbilityListRes();
             if (request.CharacterId != 0 && Server.GameSettings.GameServerSettings.PawnSkipJobTraining)
             {
-                response.AbilityParamList = SkillData.AllAbilities.Where(x => x.Job == request.Job).ToList();
+                var allDefaultAbilities = SkillData.AllAbilities.Where(x => x.Job == request.Job && !SkillData.IsUnlockableAbility(request.Job, x.AbilityNo, 1));
+                var pawnUnlocks = SkillData.AllAbilities.Where(x => x.Job == request.Job
+                    && SkillData.IsUnlockableAbility(request.Job, x.AbilityNo, 1)
+                    && client.Character.LearnedAbilities.Any(y => x.AbilityNo == y.AbilityId)
+                );
+                response.AbilityParamList = allDefaultAbilities.Concat(pawnUnlocks).ToList();
             }
             else if (request.Job != 0)
             {
