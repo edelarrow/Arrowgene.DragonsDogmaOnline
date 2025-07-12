@@ -1758,6 +1758,94 @@
     "max_count": 15,
 	"bias_lower": false,
 	"bias_rerolls": 0
+  },
+  {
+    "name": "RathniteFoothillsHunt",
+    "board_id": "RathniteFoothills",
+    "type": "Hunt",
+    "allow_normal_quests": true,
+    "allow_area_orders": false,
+    "min_level": 80,
+    "max_level": 85,
+    "min_quests": 9,
+    "max_quests": 9
+  },
+  {
+    "name": "RathniteFoothillsDelivery",
+    "board_id": "RathniteFoothills",
+    "type": "Delivery",
+    "allow_normal_quests": true,
+    "allow_area_orders": false,
+    "min_level": 80,
+    "max_level": 85,
+    "min_quests": 9,
+    "max_quests": 9
+  },
+  {
+    "name": "RathniteFoothillsHuntOrder",
+    "board_id": "RathniteFoothills",
+    "type": "Hunt",
+    "allow_normal_quests": false,
+    "allow_area_orders": true,
+    "min_level": 80,
+    "max_level": 85,
+    "min_quests": 1,
+    "max_quests": 1
+  },
+  {
+    "name": "RathniteFoothillsDeliveryOrder",
+    "board_id": "RathniteFoothills",
+    "type": "Delivery",
+    "allow_normal_quests": false,
+    "allow_area_orders": true,
+    "min_level": 80,
+    "max_level": 85,
+    "min_quests": 1,
+    "max_quests": 1
+  },
+    {
+    "name": "FelyanaWildernessHunt",
+    "board_id": "FelyanaWilderness",
+    "type": "Hunt",
+    "allow_normal_quests": true,
+    "allow_area_orders": false,
+    "min_level": 85,
+    "max_level": 90,
+    "min_quests": 9,
+    "max_quests": 9
+  },
+  {
+    "name": "FelyanaWildernessDelivery",
+    "board_id": "FelyanaWilderness",
+    "type": "Delivery",
+    "allow_normal_quests": true,
+    "allow_area_orders": false,
+    "min_level": 85,
+    "max_level": 90,
+    "min_quests": 9,
+    "max_quests": 9
+  },
+  {
+    "name": "FelyanaWildernessHuntOrder",
+    "board_id": "FelyanaWilderness",
+    "type": "Hunt",
+    "allow_normal_quests": false,
+    "allow_area_orders": true,
+    "min_level": 85,
+    "max_level": 90,
+    "min_quests": 1,
+    "max_quests": 1
+  },
+  {
+    "name": "FelyanaWildernessDeliveryOrder",
+    "board_id": "FelyanaWilderness",
+    "type": "Delivery",
+    "allow_normal_quests": false,
+    "allow_area_orders": true,
+    "min_level": 85,
+    "max_level": 90,
+    "min_quests": 1,
+    "max_quests": 1
   }
-]
+  ]
 }
