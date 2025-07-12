@@ -1500,6 +1500,6 @@ namespace Arrowgene.Ddon.Server.Settings
                 return TryGetSetting("PawnSkipJobTraining", _PawnSkipJobTraining);
             }
         }
-        private const bool _PawnSkipJobTraining = false;
+        private const bool _PawnSkipJobTraining = true;
     }
 }
