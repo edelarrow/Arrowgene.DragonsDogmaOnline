@@ -3,7 +3,6 @@ using Arrowgene.Ddon.Server;
 using Arrowgene.Ddon.Shared.Entity.PacketStructure;
 using Arrowgene.Ddon.Shared.Model;
 using Arrowgene.Logging;
-using static Arrowgene.Ddon.Server.Network.Challenge;
 
 namespace Arrowgene.Ddon.GameServer.Handler
 {
