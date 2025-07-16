@@ -1767,8 +1767,8 @@
     "allow_area_orders": false,
     "min_level": 80,
     "max_level": 85,
-    "min_quests": 9,
-    "max_quests": 9
+    "min_quests": 4,
+    "max_quests": 4
   },
   {
     "name": "RathniteFoothillsDelivery",
@@ -1778,8 +1778,8 @@
     "allow_area_orders": false,
     "min_level": 80,
     "max_level": 85,
-    "min_quests": 9,
-    "max_quests": 9
+    "min_quests": 4,
+    "max_quests": 4
   },
   {
     "name": "RathniteFoothillsHuntOrder",
@@ -1790,7 +1790,9 @@
     "min_level": 80,
     "max_level": 85,
     "min_quests": 1,
-    "max_quests": 1
+    "max_quests": 1,
+    "min_count": 6,
+    "max_count": 10
   },
   {
     "name": "RathniteFoothillsDeliveryOrder",
@@ -1801,51 +1803,57 @@
     "min_level": 80,
     "max_level": 85,
     "min_quests": 1,
-    "max_quests": 1
+    "max_quests": 1,
+    "min_count": 10,
+    "max_count": 15
   },
     {
-    "name": "FelyanaWildernessHunt",
-    "board_id": "FelyanaWilderness",
+    "name": "FeryanaWildernessHunt",
+    "board_id": "FeryanaWilderness",
     "type": "Hunt",
     "allow_normal_quests": true,
     "allow_area_orders": false,
     "min_level": 85,
     "max_level": 90,
-    "min_quests": 9,
-    "max_quests": 9
+    "min_quests": 4,
+    "max_quests": 4
   },
   {
-    "name": "FelyanaWildernessDelivery",
-    "board_id": "FelyanaWilderness",
+    "name": "FeryanaWildernessDelivery",
+    "board_id": "FeryanaWilderness",
     "type": "Delivery",
     "allow_normal_quests": true,
     "allow_area_orders": false,
     "min_level": 85,
     "max_level": 90,
-    "min_quests": 9,
-    "max_quests": 9
+    "min_quests": 4,
+    "max_quests": 4
   },
   {
-    "name": "FelyanaWildernessHuntOrder",
-    "board_id": "FelyanaWilderness",
+    "name": "FeryanaWildernessHuntOrder",
+    "board_id": "FeryanaWilderness",
     "type": "Hunt",
     "allow_normal_quests": false,
     "allow_area_orders": true,
     "min_level": 85,
     "max_level": 90,
     "min_quests": 1,
-    "max_quests": 1
+    "max_quests": 1,
+    "min_count": 6,
+    "max_count": 10
   },
   {
-    "name": "FelyanaWildernessDeliveryOrder",
-    "board_id": "FelyanaWilderness",
+    "name": "FeryanaWildernessDeliveryOrder",
+    "board_id": "FeryanaWilderness",
     "type": "Delivery",
     "allow_normal_quests": false,
     "allow_area_orders": true,
     "min_level": 85,
     "max_level": 90,
     "min_quests": 1,
-    "max_quests": 1
+    "max_quests": 1,
+    "min_count": 10,
+    "max_count": 15
   }
   ]
 }
