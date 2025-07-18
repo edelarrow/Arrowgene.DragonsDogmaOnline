@@ -33,7 +33,7 @@ namespace Arrowgene.Ddon.GameServer.Handler
                 var allDefaultAbilities = SkillData.AllAbilities.Where(x => x.Job == request.Job && !SkillData.IsUnlockableAbility(request.Job, x.AbilityNo, 1));
                 var pawnUnlocks = SkillData.AllAbilities.Where(x => x.Job == request.Job
                     && SkillData.IsUnlockableAbility(request.Job, x.AbilityNo, 1)
-                    && client.Character.LearnedAbilities.Any(y => x.AbilityNo == y.AbilityId)
+                    && IsAbilityUnlocked(client.Character, request.Job, x.AbilityNo)
                 );
                 response.AbilityParamList = allDefaultAbilities.Concat(pawnUnlocks).ToList();
             }
