@@ -1469,6 +1469,7 @@ namespace Arrowgene.Ddon.Server.Settings
 
         /// <summary>
         /// Configures if the HO exchange is enabled or not.
+        /// @warning Current implementation is able to be exploited for infinite conversion.
         /// </summary>
         [DefaultValue(_EnableHighOrbConversion)]
         public bool EnableHighOrbConversion
@@ -1482,7 +1483,7 @@ namespace Arrowgene.Ddon.Server.Settings
                 return TryGetSetting("EnableHighOrbConversion", _EnableHighOrbConversion);
             }
         }
-        private const bool _EnableHighOrbConversion = true;
+        private const bool _EnableHighOrbConversion = false;
 
         /// <summary>
         /// When set to true, allows pawns to bypass Job Training requirements
