@@ -187,8 +187,11 @@ namespace Arrowgene.Ddon.GameServer.Characters
 
         public void HandleEnemyKill(RentalPawn rentalPawn, DbConnection? connectionIn = null)
         {
-            rentalPawn.KillCount++;
-            Server.Database.UpdateRentalPawn(rentalPawn.CharacterId, rentalPawn, connectionIn);
+            lock (rentalPawn)
+            {
+                rentalPawn.KillCount++;
+                Server.Database.UpdateRentalPawn(rentalPawn.CharacterId, rentalPawn, connectionIn);
+            }
         }
     }
 }

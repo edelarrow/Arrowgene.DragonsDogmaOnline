@@ -117,8 +117,6 @@ namespace Arrowgene.Ddon.Shared.Model
         public virtual CDataPawnInfo CDataPawnInfo 
         { 
             get {
-
-                // TODO: AdventureCount, CraftCount, MaxAdventureCount, MaxCraftCount
                 var extendParams = CalculateFullExtendedParams();
                 return new CDataPawnInfo()
                 {

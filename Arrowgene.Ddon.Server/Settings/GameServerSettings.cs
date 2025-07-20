@@ -1502,7 +1502,6 @@ namespace Arrowgene.Ddon.Server.Settings
             }
         }
         private const bool _PawnSkipJobTraining = true;
-        private const bool _PawnSkipJobTraining = false;
 
         /// <summary>
         /// The number of adventure charges that a support pawn has when hired.

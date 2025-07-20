@@ -30,7 +30,7 @@ namespace Arrowgene.Ddon.Shared.Entity.Structure
         public uint Strength { get; set; }
         public uint DownPower { get; set; }
         public uint ShakePower { get; set; }
-        public uint StanPower { get; set; }
+        public uint StunPower { get; set; }
         public uint Constitution { get; set; }
         public uint Guts { get; set; }
         public ulong JobPoint { get; set; }
@@ -85,7 +85,7 @@ namespace Arrowgene.Ddon.Shared.Entity.Structure
                 WriteUInt32(buffer, obj.Strength);
                 WriteUInt32(buffer, obj.DownPower);
                 WriteUInt32(buffer, obj.ShakePower);
-                WriteUInt32(buffer, obj.StanPower);
+                WriteUInt32(buffer, obj.StunPower);
                 WriteUInt32(buffer, obj.Constitution);
                 WriteUInt32(buffer, obj.Guts);
                 WriteUInt64(buffer, obj.JobPoint);
@@ -140,7 +140,7 @@ namespace Arrowgene.Ddon.Shared.Entity.Structure
                 obj.Strength = ReadUInt32(buffer);
                 obj.DownPower = ReadUInt32(buffer);
                 obj.ShakePower = ReadUInt32(buffer);
-                obj.StanPower = ReadUInt32(buffer);
+                obj.StunPower = ReadUInt32(buffer);
                 obj.Constitution = ReadUInt32(buffer);
                 obj.Guts = ReadUInt32(buffer);
                 obj.JobPoint = ReadUInt64(buffer);

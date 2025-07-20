@@ -15,7 +15,7 @@ using Arrowgene.Logging;
 
 namespace Arrowgene.Ddon.GameServer.Handler
 {
-    public class CraftStartCraftHandler : GameRequestPacketHandler<C2SCraftStartCraftReq, S2CCraftStartCraftRes>
+    public class CraftStartCraftHandler : GameRequestPacketQueueHandler<C2SCraftStartCraftReq, S2CCraftStartCraftRes>
     {
         private static readonly ServerLogger Logger = LogProvider.Logger<ServerLogger>(typeof(CraftStartCraftHandler));
 
@@ -39,7 +39,7 @@ namespace Arrowgene.Ddon.GameServer.Handler
         {
         }
 
-        public override S2CCraftStartCraftRes Handle(GameClient client, C2SCraftStartCraftReq request)
+        public override PacketQueue Handle(GameClient client, C2SCraftStartCraftReq request)
         {
             CraftingRecipe recipe;
             try
@@ -72,14 +72,15 @@ namespace Arrowgene.Ddon.GameServer.Handler
 
             Pawn leadPawn = Server.CraftManager.FindPawn(client, request.CraftMainPawnID);
 
-            List<CraftPawn> craftPawns = new()
-            {
-                new CraftPawn(leadPawn, CraftPosition.Leader)
-            };
-            craftPawns.AddRange(request.CraftSupportPawnIDList.Select(p => new CraftPawn(Server.CraftManager.FindPawn(client, p.PawnId), CraftPosition.Assistant)));
-            craftPawns.AddRange(request.CraftMasterLegendPawnIDList.Select(p => new CraftPawn(Server.AssetRepository.PawnCraftMasterLegendAsset.Single(m => m.PawnId == p.PawnId))));
+            List<CraftPawn> craftPawns =
+            [
+                new CraftPawn(leadPawn, CraftPosition.Leader),
+                .. request.CraftSupportPawnIDList.Select(p => new CraftPawn(Server.CraftManager.FindPawn(client, p.PawnId), CraftPosition.Assistant)),
+                .. request.CraftMasterLegendPawnIDList.Select(p => new CraftPawn(Server.AssetRepository.PawnCraftMasterLegendAsset.Single(m => m.PawnId == p.PawnId))),
+            ];
 
             PacketQueue packets = new();
+            PacketQueue affectionPackets = new();
             Server.Database.ExecuteInTransaction(connection =>
             {
                 // Remove crafting materials
@@ -167,20 +168,16 @@ namespace Arrowgene.Ddon.GameServer.Handler
                     craftProgress.BonusExp = 0;
                 }
 
-                foreach (CraftPawn p in craftPawns)
-                {
-                    if (p.Pawn is RentalPawn rentalPawn)
-                    {
-                        Server.RentalPawnManager.HandleCraftCountDecrement(rentalPawn, connection);
-                    }
-                }
-
                 Server.Database.InsertPawnCraftProgress(craftProgress, connection);
                 foreach (CraftPawn pawn in craftPawns)
                 {
                     if (pawn.Pawn != null)
                     {
-                        if (pawn.Pawn.PawnType == PawnType.Main)
+                        if (pawn.Pawn is RentalPawn rentalPawn)
+                        {
+                            Server.RentalPawnManager.HandleCraftCountDecrement(rentalPawn, connection);
+                        }
+                        else if (pawn.Pawn.PawnType == PawnType.Main)
                         {
                             // Only main pawns need their status tracked persistently.
                             pawn.Pawn.PawnState = PawnState.Craft;
@@ -192,7 +189,9 @@ namespace Arrowgene.Ddon.GameServer.Handler
                 // Subtract craft price
                 uint cost = Server.CraftManager.CalculateRecipeCost(recipe.Cost, itemInfo, craftPawns) * request.CreateCount;
                 CDataUpdateWalletPoint updateWalletPoint = Server.WalletManager.RemoveFromWallet(client.Character, WalletType.Gold, cost, connection)
-                ?? throw new ResponseErrorException(ErrorCode.ERROR_CODE_CRAFT_INSUFFICIENT_GOLD, $"Insufficient gold. {cost} > {Server.WalletManager.GetWalletAmount(client.Character, WalletType.Gold)}"); updateCharacterItemNtc.UpdateWalletList.Add(updateWalletPoint);
+                    ?? throw new ResponseErrorException(ErrorCode.ERROR_CODE_CRAFT_INSUFFICIENT_GOLD, 
+                    $"Insufficient gold. {cost} > {Server.WalletManager.GetWalletAmount(client.Character, WalletType.Gold)}"); 
+                updateCharacterItemNtc.UpdateWalletList.Add(updateWalletPoint);
 
                 if (request.CraftMasterLegendPawnIDList.Count > 0)
                 {
@@ -204,14 +203,14 @@ namespace Arrowgene.Ddon.GameServer.Handler
 
                 if (leadPawn.PawnId == client.Character.PartnerPawnId)
                 {
-                    packets.AddRange(Server.PartnerPawnManager.UpdateLikabilityIncreaseAction(client, PartnerPawnAffectionAction.Craft, connection));
+                    affectionPackets.AddRange(Server.PartnerPawnManager.UpdateLikabilityIncreaseAction(client, PartnerPawnAffectionAction.Craft, connection));
                 }
             });
+            client.Enqueue(new S2CCraftStartCraftRes(), packets);
+            client.Enqueue(updateCharacterItemNtc, packets);
+            packets.AddRange(affectionPackets);
 
-            packets.Send();
-
-            client.Send(updateCharacterItemNtc);
-            return new S2CCraftStartCraftRes();
+            return packets;
         }
     }
 }

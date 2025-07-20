@@ -135,7 +135,7 @@ namespace Arrowgene.Ddon.Shared.Model
         public uint LastSafeStageId { get; set; }
         public uint ClanId { get; set; }
         public ClanName ClanName { get; set; }
-        public bool IsLanternLit { get; set; }
+        public bool IsLanternLit => LanternTimer > 0;
         public uint LanternTimer { get; set; }
 
         public Dictionary<JobId, JobEmblem> JobEmblems { get; set; }

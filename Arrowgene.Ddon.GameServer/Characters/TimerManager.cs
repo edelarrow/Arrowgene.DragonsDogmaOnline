@@ -109,23 +109,6 @@ namespace Arrowgene.Ddon.GameServer.Characters
             }
         }
 
-        public ulong SetTimer(uint timerId, uint timeInSeconds)
-        {
-            lock (_Timers)
-            {
-                if (!_Timers.TryGetValue(timerId, out TimerState timerState))
-                {
-                    throw new Exception($"TimerId={timerId} does not exist.");
-                }
-
-                Logger.Info($"Setting timer to {timeInSeconds} seconds for TimerId={timerId}");
-                timerState.CumulativeElapsed += GetTimeLeft(timerId);
-                timerState.Duration = TimeSpan.FromSeconds(timeInSeconds);
-                timerState.TimeStart = DateTime.Now;
-                return (ulong)((DateTimeOffset)(_Timers[timerId].TimeStart + _Timers[timerId].Duration)).ToUnixTimeSeconds();
-            }
-        }
-
         public TimeSpan GetTimeLeft(uint timerId)
         {
             lock (_Timers)

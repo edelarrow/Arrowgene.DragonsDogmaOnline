@@ -6,16 +6,16 @@ namespace Arrowgene.Ddon.Shared
 {
     public static class RandomExtensions
     {
-        public static ulong NextU64(this Random rnd)
+        public static UInt64 NextU64(this Random rnd)
         {
-            var buffer = new byte[sizeof(long)];
+            var buffer = new byte[sizeof(UInt64)];
             rnd.NextBytes(buffer);
             return BitConverter.ToUInt64(buffer, 0);
         }
 
-        public static uint NextU32(this Random rnd)
+        public static UInt32 NextU32(this Random rnd)
         {
-            var buffer = new byte[sizeof(long)];
+            var buffer = new byte[sizeof(UInt32)];
             rnd.NextBytes(buffer);
             return BitConverter.ToUInt32(buffer, 0);
         }

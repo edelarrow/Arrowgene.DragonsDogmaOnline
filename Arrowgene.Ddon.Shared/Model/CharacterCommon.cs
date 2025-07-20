@@ -145,8 +145,8 @@ namespace Arrowgene.Ddon.Shared.Model
                     Strength = ActiveCharacterJobData?.Strength ?? 0,
                     DownPower = ActiveCharacterJobData?.DownPower ?? 0,
                     ShakePower = ActiveCharacterJobData?.ShakePower ?? 0,
-                    // StanPower?
-                    // Constitution?
+                    StunPower = ActiveCharacterJobData?.StunPower ?? 0,
+                    Constitution = ActiveCharacterJobData?.Constitution ?? 0,
                     Guts = ActiveCharacterJobData?.Guts ?? 0,
                     JobPoint = ActiveCharacterJobData?.JobPoint ?? 0,
                     GainHp = StatusInfo.GainHP,
@@ -190,7 +190,6 @@ namespace Arrowgene.Ddon.Shared.Model
                     EmblemStatList = EmblemStatList,
                     ContextEquipPerformanceList = Equipment.AsCDataContextEquipData(EquipType.Performance),
                     ContextEquipVisualList = Equipment.AsCDataContextEquipData(EquipType.Visual),
-
                 };
             } 
         }
@@ -238,8 +237,6 @@ namespace Arrowgene.Ddon.Shared.Model
 
         public abstract CDataCommunityCharacterBaseInfo CDataCommunityCharacterBaseInfo { get; }
         public abstract CDataCharacterName CDataCharacterName { get; }
-
-
 
         #endregion
     }
