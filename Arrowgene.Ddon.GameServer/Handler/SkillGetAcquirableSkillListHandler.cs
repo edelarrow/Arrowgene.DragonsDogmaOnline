@@ -30,13 +30,18 @@ namespace Arrowgene.Ddon.GameServer.Handler
                 var allDefaultSkills = SkillData.AllSkills.Where(x => x.Job == request.Job && !SkillData.IsUnlockableSkill(request.Job, x.SkillNo, 1));
                 var pawnUnlocks = SkillData.AllSkills.Where(x => x.Job == request.Job
                     && SkillData.IsUnlockableSkill(request.Job, x.SkillNo, 1)
-                    && client.Character.LearnedCustomSkills.Any(y => x.SkillNo == y.SkillId)
+                    && IsSkillUnlocked(client.Character, request.Job, x.SkillNo)
                     );
                 return new S2CSkillGetAcquirableSkillListRes()
                 {
                     SkillParamList = allDefaultSkills.Concat(pawnUnlocks).ToList()
                 };
             }
+        }
+
+        private bool IsSkillUnlocked(Character character, JobId jobId, uint skillNo)
+        {
+            return character.UnlockedCustomSkills[jobId].Contains(skillNo);
         }
     }
 }

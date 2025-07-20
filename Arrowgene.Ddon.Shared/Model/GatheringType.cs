@@ -59,9 +59,10 @@ namespace Arrowgene.Ddon.Shared.Model
         PurpleChest = 513056,
         UnkChest0 = 513060,
         UnkChest1 = 513061,
-        // SetInfoOmTreasureBoxG (BBM)
-        OrangeSealedChest = 513130,
-        PurpleSealedChest = 513133,
+        // SetInfoOmTreasureBoxG
+        OrangeSealedChest = 513130, // (BBM)
+        PurpleSealedChest = 513133, // (BBM)
+        PearlescentChest = 513134, // 3.4 EXM reward treasure box
     }
 
     public enum GatheringPointType
@@ -148,6 +149,7 @@ namespace Arrowgene.Ddon.Shared.Model
             // OmTreasureBoxG
             [OmGatheringPoint.OrangeSealedChest] = GatheringPointType.SealedTreasureChest,
             [OmGatheringPoint.PurpleSealedChest] = GatheringPointType.SealedTreasureChest,
+            [OmGatheringPoint.PearlescentChest] = GatheringPointType.SealedTreasureChest,
         };
 
         public static GatheringPointType GetGatheringPointType(this OmGatheringPoint omGatheringPoint)
