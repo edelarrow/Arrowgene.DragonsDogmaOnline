@@ -545,12 +545,12 @@ public partial class DdonSqlDb : SqlDb
     //Helper function to add specific items to a storage
     public override void CreateListItems(DbConnection conn, Character character, StorageType storageType, List<(uint ItemId, uint Amount)> itemList)
     {
-        Storage itemBagJob = character.Storage.GetAllStorages()[storageType];
+        Storage itemType = character.Storage.GetAllStorages()[storageType];
         foreach ((uint itemId, uint quantity) in itemList)
         {
-            Item jobItem = new() { ItemId = itemId };
-            ushort slot = itemBagJob.AddItem(jobItem, quantity);
-            InsertStorageItem(character.ContentCharacterId, StorageType.ItemBagJob, slot, quantity, jobItem, conn);
+            Item storageItem = new() { ItemId = itemId };
+            ushort slot = itemType.AddItem(storageItem, quantity);
+            InsertStorageItem(character.ContentCharacterId, storageType, slot, quantity, storageItem, conn);
         }
     }
 
