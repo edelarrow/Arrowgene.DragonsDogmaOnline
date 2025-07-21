@@ -18,7 +18,7 @@ SELECT
 	title_index,
 	motion_id,
 	motion_frame_no,
-	"" as comment
+	'' as comment
 FROM "ddon_character_arisen_profile"
 NATURAL JOIN "ddon_character";
 
@@ -30,7 +30,7 @@ SELECT
 	0 as title_index,
 	0 as motion_id,
 	0 as motion_frame_no,
-	"" as comment
+	'' as comment
 FROM "ddon_pawn";
 
 CREATE TABLE IF NOT EXISTS "ddon_rental_pawn"
