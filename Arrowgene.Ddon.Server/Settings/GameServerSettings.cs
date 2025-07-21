@@ -819,6 +819,58 @@ namespace Arrowgene.Ddon.Server.Settings
         }
 
         /// <summary>
+        /// Minimum price in G for a single item on the bazaar.
+        /// </summary>
+        [DefaultValue(_BazaarExhibitionMinPrice)]
+        public uint BazaarExhibitionMinPrice
+        {
+            set
+            {
+                SetSetting("BazaarExhibitionMinPrice", value);
+            }
+            get
+            {
+                return TryGetSetting("BazaarExhibitionMinPrice", _BazaarExhibitionMinPrice);
+            }
+        }
+        private const uint _BazaarExhibitionMinPrice = 1;
+
+        /// <summary>
+        /// Maximum price in G for a single item on the bazaar.
+        /// This ends up being interpreted as a signed integer by the client, so its capped at ~2 billion.
+        /// </summary>
+        [DefaultValue(_BazaarExhibitionMaxPrice)]
+        public uint BazaarExhibitionMaxPrice
+        {
+            set
+            {
+                SetSetting("BazaarExhibitionMaxPrice", value);
+            }
+            get
+            {
+                return TryGetSetting("BazaarExhibitionMaxPrice", _BazaarExhibitionMaxPrice);
+            }
+        }
+        private const uint _BazaarExhibitionMaxPrice = 99999;
+
+        /// <summary>
+        /// Number of items that can be included in a single exhibition on the bazaar.
+        /// </summary>
+        [DefaultValue(_BazaarExhibitionMaxItemNum)]
+        public ushort BazaarExhibitionMaxItemNum
+        {
+            set
+            {
+                SetSetting("BazaarExhibitionMaxItemNum", value);
+            }
+            get
+            {
+                return TryGetSetting("BazaarExhibitionMaxItemNum", _BazaarExhibitionMaxItemNum);
+            }
+        }
+        private const ushort _BazaarExhibitionMaxItemNum = 20;
+
+        /// <summary>
         /// Ties area rank progress to various paths to dungeons.
         /// </summary>
         [DefaultValue(_EnableAreaRankSpotLocks)]

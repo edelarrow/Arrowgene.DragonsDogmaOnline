@@ -45,8 +45,8 @@ namespace Arrowgene.Ddon.Shared.Entity
             Create(new CDataAreaInfoList.Serializer());
             Create(new CDataAreaQuestHint.Serializer());
             Create(new CDataAreaRank.Serializer());
-            Create(new CDataAreaRankSeason3.Serializer());
-            Create(new CDataAreaRankUnk0.Serializer());
+            Create(new CDataAreaRankPeriodicallyReleasedSpot.Serializer());
+            Create(new CDataAreaRankMonsterGatheringSpot.Serializer());
             Create(new CDataAreaRankUpQuestInfo.Serializer());
             Create(new CDataAreaSpotSet.Serializer());
             Create(new CDataArisenProfile.Serializer());
