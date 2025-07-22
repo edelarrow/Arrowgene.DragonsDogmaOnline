@@ -42,5 +42,22 @@ namespace Arrowgene.Ddon.Server.Settings
             }
         }
         private const bool _CrossChannelShout = true;
+
+        /// <summary>
+        /// If true, enables chat commands to manipulate vanity equipment. 
+        /// </summary>
+        [DefaultValue(_EnableFashionCommands)]
+        public bool EnableFashionCommands
+        {
+            set
+            {
+                SetSetting("EnableFashionCommands", value);
+            }
+            get
+            {
+                return TryGetSetting("EnableFashionCommands", _EnableFashionCommands);
+            }
+        }
+        private const bool _EnableFashionCommands = false;
     }
 }
