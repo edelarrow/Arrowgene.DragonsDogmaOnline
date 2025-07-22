@@ -197,7 +197,7 @@ skillAugmentation.AddNode(34)
     .Location(4, 13)
     .BloodOrbCost(5500)
     .HasUnlockDependencies(31)
-    .Unlocks(CustomSkillId.WallGlastaT);
+    .Unlocks(CustomSkillId.AuromFangT);
 skillAugmentation.AddNode(35)
     .Location(7, 13)
     .BloodOrbCost(3600)
@@ -283,7 +283,7 @@ skillAugmentation.AddNode(50)
     .Location(4, 18)
     .HighOrbCost(850)
     .HasUnlockDependencies(46, 47)
-    .Unlocks(CustomSkillId.WallGlastaP);
+    .Unlocks(CustomSkillId.AuromFangP);
 #endregion
 
 return skillAugmentation;
