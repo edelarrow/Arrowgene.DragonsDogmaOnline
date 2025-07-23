@@ -289,7 +289,7 @@ namespace Arrowgene.Ddon.Database.Sql.Core
                                     CommentNo = GetByte(reader, "craft_comment")
                                 });
                             }
-                            history.PawnFeedback = feedback.OrderBy(x => x.Value).FirstOrDefault(new CDataPawnFeedback());
+                            history.PawnFeedback = feedback.OrderByDescending(x => x.Value).FirstOrDefault(new CDataPawnFeedback());
 
                             historyList.Add(history);
                         }
