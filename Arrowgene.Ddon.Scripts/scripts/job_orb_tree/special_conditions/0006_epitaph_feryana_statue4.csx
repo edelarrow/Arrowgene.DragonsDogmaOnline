@@ -7,7 +7,7 @@ public class SpecialCondition : IJobOrbSpecialCondition
     
     public override bool EvaluateCondition(GameClient client)
     {
-        return LibDdon.EpitaphRoadMgr.IsStatueUnlocked(client, Stage.HeroicSpiritSleepingPathRuinsDeepestLevel, 109, 0);
+        return LibDdon.EpitaphRoadMgr.IsStatueUnlocked(client, Stage.HeroicSpiritSleepingPathRuinsDeepestLevel, 101, 0);
     }
 }
 
