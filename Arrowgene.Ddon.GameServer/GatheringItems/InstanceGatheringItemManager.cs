@@ -81,13 +81,14 @@ namespace Arrowgene.Ddon.GameServer.GatheringItems
 
         public HashSet<byte> GatheredSpots(CDataStageLayoutId stageLayout)
         {
-            return [.. InstancedItems.GetValueOrDefault(stageLayout.AsStageLayoutId()).Select(x => (byte)x.Key)];
+            return [.. InstancedItems.GetValueOrDefault(stageLayout.AsStageLayoutId(), [])
+                .Select(x => (byte)x.Key)];
         }
 
         public HashSet<byte> EmptySpots(CDataStageLayoutId stageLayout)
         {
-            return [.. InstancedItems.GetValueOrDefault(stageLayout.AsStageLayoutId())
-                .Where(x => x.Value.Count == 0)
+            return [.. InstancedItems.GetValueOrDefault(stageLayout.AsStageLayoutId(), [])
+                .Where(x => x.Value.DefaultIfEmpty().Sum(y => y.ItemNum) == 0)
                 .Select(x => (byte)x.Key)];
         }
 
