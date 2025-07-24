@@ -1625,7 +1625,7 @@ namespace Arrowgene.Ddon.Server.Settings
                 return TryGetSetting("RentalPawnAdventureTimerAutoReset", _RentalPawnAdventureTimerAutoReset);
             }
         }
-        private const bool _RentalPawnAdventureTimerAutoReset = false;
+        private const bool _RentalPawnAdventureTimerAutoReset = true;
 
         /// <summary>
         /// If true, rental pawns will consume an adventure charge when starting an EXM, but won't have their usual adventure timer running.

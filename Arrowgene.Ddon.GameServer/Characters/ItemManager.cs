@@ -907,17 +907,17 @@ namespace Arrowgene.Ddon.GameServer.Characters
         }
 
 
-        public CDataItemUpdateResult CreateItemUpdateResult(CharacterCommon character, Item item, StorageType storageType, ushort slotNo, uint itemNum, uint updateItemNum)
+        public CDataItemUpdateResult CreateItemUpdateResult(CharacterCommon common, Item item, StorageType storageType, ushort slotNo, uint itemNum, uint updateItemNum)
         {
             uint pawnId = 0;
             uint characterId = 0;
-            if (character is Character)
+            if (common is Character character)
             {
-                characterId = ((Character)character).CharacterId;
+                characterId = character.CharacterId;
             }
-            else if (character is Pawn)
+            else if (common is Pawn pawn)
             {
-                pawnId = ((Pawn)character).PawnId;
+                pawnId = pawn.PawnId;
             }
 
             CDataItemUpdateResult updateResult = new CDataItemUpdateResult();

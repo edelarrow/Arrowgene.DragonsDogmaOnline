@@ -1,3 +1,4 @@
+using Arrowgene.Ddon.GameServer.Characters;
 using Arrowgene.Ddon.Server;
 using Arrowgene.Ddon.Server.Network;
 using Arrowgene.Ddon.Shared.Entity.PacketStructure;
@@ -67,7 +68,7 @@ namespace Arrowgene.Ddon.GameServer.Handler
 
                 response.TotalRim = walletUpdate.Value;
 
-                rentalRecord = RentalPawnRecord.FromPawn(pawn);
+                rentalRecord = RentalPawnRecord.FromPawn(pawn, ownerCharacter);
                 Server.Database.InsertRentalPawn(client.Character.CharacterId, rentalRecord, AdventureCount, CraftCount, connectionIn);
 
                 packetQueue.AddRange(Server.AchievementManager.HandleHirePawn(client, connectionIn));
