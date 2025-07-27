@@ -152,7 +152,18 @@ public class Mixin : IDefaultGatherMixin
             return new();
         }
 
-        if (!LibDdon.Assets.DefaultGatheringDropsAsset.AreaDefaultDrops.ContainsKey(client.Character.AreaId))
+        var areaId = stage.AreaId;
+        if (stage.StageId == Stage.Lestania.StageId)
+        {
+            areaId = client.Character.AreaId;
+            if (areaId == QuestAreaId.None)
+            {
+                // Default to hidell plains so something can drop
+                areaId = QuestAreaId.HidellPlains;
+            }
+        }
+
+        if (!LibDdon.Assets.DefaultGatheringDropsAsset.AreaDefaultDrops.ContainsKey(areaId))
         {
             return new();
         }
@@ -162,7 +173,7 @@ public class Mixin : IDefaultGatherMixin
         Logger.Debug($"{stageLayoutId}.{index}  OmType={spotInfo.UnitId}, GatheringType={spotInfo.GatheringType}");
 
         var dropTable = GetDropCategoriesForSpot(spotInfo)
-            .Select(x => LibDdon.Assets.DefaultGatheringDropsAsset.AreaDefaultDrops[client.Character.AreaId][x])
+            .Select(x => LibDdon.Assets.DefaultGatheringDropsAsset.AreaDefaultDrops[areaId][x])
             .Where(x => x.Count > 0)
             .SelectMany(x => x)
             .Where(x => x.StageId == stage.StageId)
