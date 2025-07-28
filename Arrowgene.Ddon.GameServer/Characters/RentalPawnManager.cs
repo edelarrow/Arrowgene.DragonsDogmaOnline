@@ -73,7 +73,7 @@ namespace Arrowgene.Ddon.GameServer.Characters
                                 if (Server.GameSettings.GameServerSettings.RentalPawnAdventureTimerAutoReset)
                                 {
                                     Server.TimerManager.CancelTimer(pawnMember.AdventureTimer);
-                                    SetupTimer(client, pawnMember);
+                                    SetupTimer(client, pawnMember, false);
                                     Logger.Info($"Automatically resetting adventure timer for {client.Character.CDataCharacterName}'s rental pawn {rentalPawn.CDataCharacterName}");
                                 }
                                 else
@@ -107,7 +107,7 @@ namespace Arrowgene.Ddon.GameServer.Characters
                     else if (pawnMember.AdventureTimer == 0)
                     {
                         // Reapply timer to any rental pawns that have finished theirs.
-                        SetupTimer(client, pawnMember);
+                        SetupTimer(client, pawnMember, false);
                     }
                 }
             }
@@ -115,7 +115,7 @@ namespace Arrowgene.Ddon.GameServer.Characters
             return queue;
         }
 
-        public void SetupTimer(GameClient client, PawnPartyMember pawnMember)
+        public void SetupTimer(GameClient client, PawnPartyMember pawnMember, bool silent = true)
         {
             uint adventureTimeLength = Server.GameSettings.GameServerSettings.RentalPawnAdventureTimer;
             lock (pawnMember.TimerLock)
@@ -125,6 +125,15 @@ namespace Arrowgene.Ddon.GameServer.Characters
                     Logger.Info($"Triggering adventure timer for {client.Character.CDataCharacterName}'s rental pawn {pawnMember.Pawn.CDataCharacterName}");
                     HandleAdventureCountDecrement(client, (RentalPawn)pawnMember.Pawn).Send();
                     pawnMember.AdventureTimer = 0;
+                });
+            }
+
+            if (!silent)
+            {
+                client.Send(new S2CLobbyChatMsgNotice()
+                {
+                    Type = LobbyChatMsgType.ManagementGuideC,
+                    Message = $"{pawnMember.Pawn.CDataCharacterName} is ready for a new adventure."
                 });
             }
         }
@@ -191,6 +200,18 @@ namespace Arrowgene.Ddon.GameServer.Characters
             {
                 rentalPawn.KillCount++;
                 Server.Database.UpdateRentalPawn(rentalPawn.CharacterId, rentalPawn, connectionIn);
+            }
+        }
+
+        public (bool IsRunning, uint MinutesLeft) GetAdventureTimeRemaining(PawnPartyMember pawn)
+        {
+            if (pawn.AdventureTimer == 0)
+            {
+                return (false, 0);
+            }
+            else
+            {
+                return (true, (uint)(Server.TimerManager.GetTimeLeftInSeconds(pawn.AdventureTimer) / 60));
             }
         }
     }

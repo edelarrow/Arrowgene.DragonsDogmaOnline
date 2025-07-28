@@ -24,7 +24,7 @@ namespace Arrowgene.Ddon.GameServer.Handler
             pawn.CharacterId = client.Character.CharacterId;
             pawn.IsRented = true;
             pawn.PawnType = PawnType.Support;
-            Server.RentalPawnManager.SetupTimer(client, partyMember);
+            Server.RentalPawnManager.SetupTimer(client, partyMember, true);
 
             client.Party.SendToAll(new S2CPawnJoinPartyPawnNtc() { PartyMember = partyMember.CDataPartyMember });
             client.Party.SendToAll(partyMember.GetS2CContextGetPartyRentedPawn_ContextNtc());

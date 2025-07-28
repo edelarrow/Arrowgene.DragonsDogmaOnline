@@ -38,7 +38,7 @@ namespace Arrowgene.Ddon.Shared.Model
             // This has to exist for JSON reasons.
         }
 
-        public static RentalPawnRecord FromPawn(Pawn pawn)
+        public static RentalPawnRecord FromPawn(Pawn pawn, Character ownerCharacter)
         {
             var record = new RentalPawnRecord()
             {
@@ -60,7 +60,9 @@ namespace Arrowgene.Ddon.Shared.Model
                 LearnedNormalSkills = [.. pawn.LearnedNormalSkills.Where(x => x.Job == pawn.Job)],
                 EquippedCustomSkills = pawn.EquippedCustomSkillsDictionary.GetValueOrDefault(pawn.Job),
                 EquippedAbilities = pawn.EquippedAbilitiesDictionary.GetValueOrDefault(pawn.Job),
-                ExtendedParams = pawn.ExtendedParams + pawn.ExtendedJobParams.GetValueOrDefault(pawn.Job, new()),
+                ExtendedParams = pawn.ExtendedParams 
+                    + ownerCharacter.ExtendedJobParams.GetValueOrDefault(JobId.None, new()) 
+                    + ownerCharacter.ExtendedJobParams.GetValueOrDefault(pawn.Job, new()),
                 HireDate = DateTime.Now,
                 PawnProfile = pawn.CharacterProfile
             };
@@ -73,60 +75,61 @@ namespace Arrowgene.Ddon.Shared.Model
             RentalPawn pawn = new()
             {
                 // RentalPawn Fields
-                OwningCharacterId = this.CharacterId,
+                OwningCharacterId = CharacterId,
                 AdventureCount = adventureCount,
                 CraftCount = craftCount,
-                KillCount = 0,
+                KillCount = killCount,
                 HireDate = HireDate,
 
                 // Pawn Fields
-                PawnId = this.PawnId,
+                PawnId = PawnId,
                 CharacterId = hiringCharacterId,
-                Name = this.Name,
+                Name = Name,
                 HmType = 1,
                 PawnType = PawnType.Support,
-                PawnReactionList = this.PawnReactionList,
-                CraftData = this.CraftData,
-                TrainingStatus = new() { { this.Job, this.TrainingStatus } },
-                SpSkills = new() { { this.Job, this.SpSkills } },
-                IsOfficialPawn = this.IsOfficialPawn,
+                PawnReactionList = PawnReactionList,
+                CraftData = CraftData,
+                TrainingStatus = new() { { Job, TrainingStatus } },
+                SpSkills = new() { { Job, SpSkills } },
+                IsOfficialPawn = IsOfficialPawn,
                 IsRented = true,
                 PawnState = PawnState.None,
 
                 // CharacterCommon Fields
-                CommonId = this.CommonId,
+                CommonId = CommonId,
                 Server = new(), // ???
-                EditInfo = this.EditInfo,
-                StatusInfo = new(),
-                Job = this.Job,
-                HideEquipHead = this.HideEquipHead,
-                HideEquipLantern = this.HideEquipLantern,
-                CharacterJobDataList = new() { this.CharacterJobData },
-                Equipment = this.Equipment,
-                JewelrySlotNum = (byte)(1 + this.ExtendedParams.JewelrySlot),
-                LearnedNormalSkills = this.LearnedNormalSkills,
-                LearnedCustomSkills = [.. this.EquippedCustomSkills.Where(x => x is not null)],
-                EquippedCustomSkillsDictionary = new() { { this.Job, this.EquippedCustomSkills } },
-                LearnedAbilities = [.. this.EquippedAbilities.Where(x => x is not null)],
-                EquippedAbilitiesDictionary = new() { { this.Job, this.EquippedAbilities } },
-                ExtendedParams = this.ExtendedParams,
-                ExtendedJobParams = new() { { this.Job, new() } },
-                OrbRelease = new(),
-                CharacterProfile = this.PawnProfile
+                EditInfo = EditInfo,
+                StatusInfo = new()
+                {
+                    GainAttack = ExtendedParams.Attack,
+                    GainDefense = ExtendedParams.Defence,
+                    GainMagicAttack = ExtendedParams.MagicAttack,
+                    GainMagicDefense = ExtendedParams.MagicDefence,
+                    GainStamina = ExtendedParams.StaminaMax,
+                    GainHP = ExtendedParams.HpMax,
+
+                    MaxHP = 760U,
+                    MaxStamina = 450U,
+                    HP = uint.MaxValue,
+                    WhiteHP = uint.MaxValue,
+                    Stamina = uint.MaxValue,
+                },
+                Job = Job,
+                HideEquipHead = HideEquipHead,
+                HideEquipLantern = HideEquipLantern,
+                CharacterJobDataList = [CharacterJobData],
+                Equipment = Equipment,
+                JewelrySlotNum = (byte)(1 + ExtendedParams.JewelrySlot),
+                LearnedNormalSkills = LearnedNormalSkills,
+                LearnedCustomSkills = [.. EquippedCustomSkills.Where(x => x is not null)],
+                EquippedCustomSkillsDictionary = new() { { Job, EquippedCustomSkills } },
+                LearnedAbilities = [.. EquippedAbilities.Where(x => x is not null)],
+                EquippedAbilitiesDictionary = new() { { Job, EquippedAbilities } },
+                ExtendedParams = ExtendedParams,
+                ExtendedJobParams = new() { { Job, new() } },
+                OrbRelease = [],
+                CharacterProfile = PawnProfile
             };
-
-            pawn.StatusInfo.GainAttack = this.ExtendedParams.Attack;
-            pawn.StatusInfo.GainDefense = this.ExtendedParams.Defence;
-            pawn.StatusInfo.GainMagicAttack = this.ExtendedParams.MagicAttack;
-            pawn.StatusInfo.GainMagicDefense = this.ExtendedParams.MagicDefence;
-            pawn.StatusInfo.GainStamina = this.ExtendedParams.StaminaMax;
-            pawn.StatusInfo.GainHP = this.ExtendedParams.HpMax;
-
-            pawn.StatusInfo.MaxHP = 760U;
-            pawn.StatusInfo.MaxStamina = 450U;
-            pawn.StatusInfo.HP = uint.MaxValue;
-            pawn.StatusInfo.WhiteHP = uint.MaxValue;
-            pawn.StatusInfo.Stamina = uint.MaxValue;
 
             return pawn;
         }

@@ -74,11 +74,11 @@ namespace Arrowgene.Ddon.Database.Sql.Core
                 SUM("ddon_rental_pawn_feedback"."kill_count") as "kill_count",
                 SUM("ddon_rental_pawn_feedback"."craft_count") as "craft_count",
                 AVG("ddon_rental_pawn_feedback"."appearance_score") as "average_appearance",
-            	STRING_AGG("ddon_rental_pawn_feedback"."appearance_comment", ',') as "appearance_comment",
+            	STRING_AGG(CAST("ddon_rental_pawn_feedback"."appearance_comment" AS TEXT), '') as "appearance_comment",
                 AVG("ddon_rental_pawn_feedback"."combat_score") as "average_combat",
-            	STRING_AGG("ddon_rental_pawn_feedback"."combat_comment", ',') as "combat_comment",
+            	STRING_AGG(CAST("ddon_rental_pawn_feedback"."combat_comment" AS TEXT), '') as "combat_comment",
                 AVG("ddon_rental_pawn_feedback"."craft_score") as "average_craft",
-            	STRING_AGG("ddon_rental_pawn_feedback"."craft_comment", ',') as "craft_comment"
+            	STRING_AGG(CAST("ddon_rental_pawn_feedback"."craft_comment" AS TEXT), '') as "craft_comment"
                 FROM "ddon_rental_pawn_feedback"
             WHERE "ddon_rental_pawn_feedback"."pawn_id" = @pawn_id
             GROUP BY "ddon_rental_pawn_feedback"."pawn_id";
