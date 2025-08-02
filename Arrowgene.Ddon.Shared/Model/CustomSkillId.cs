@@ -517,7 +517,7 @@ namespace Arrowgene.Ddon.Shared.Model
 
 		private static readonly Dictionary<JobId, HashSet<CustomSkillId>> gCustomSkillJobIdMap = new()
 		{
-			{Model.JobId.Fighter, [
+			[Model.JobId.Fighter] = [
 				CustomSkillId.BlinkStrike,
 				CustomSkillId.Downthrust,
 				CustomSkillId.CymbalAttack,
@@ -540,8 +540,8 @@ namespace Arrowgene.Ddon.Shared.Model
 				CustomSkillId.DownthrustT,
 				CustomSkillId.SkywardLashP,
 				CustomSkillId.SkywardLashT,
-			]},
-			{Model.JobId.Seeker,[
+			],
+			[Model.JobId.Seeker] = [
 				CustomSkillId.BitingWind,
                 CustomSkillId.TossAndTrigger,
                 CustomSkillId.Ensnare,
@@ -564,8 +564,8 @@ namespace Arrowgene.Ddon.Shared.Model
                 CustomSkillId.SteppingStoneT,
                 CustomSkillId.TossAndTriggerP,
                 CustomSkillId.TossAndTriggerT,
-			]},
-			{Model.JobId.Hunter,[
+			],
+			[Model.JobId.Hunter] = [
                 CustomSkillId.ThreefoldArrow,
                 CustomSkillId.TriadShot,
                 CustomSkillId.FlyingDin,
@@ -588,8 +588,8 @@ namespace Arrowgene.Ddon.Shared.Model
                 CustomSkillId.FullBendT,
                 CustomSkillId.ExplosiveArrowVolleyP,
                 CustomSkillId.ExplosiveArrowVolleyT,
-            ]},
-			{Model.JobId.Priest,[
+            ],
+			[Model.JobId.Priest] = [
                 CustomSkillId.HealingSpot,
                 CustomSkillId.CuringSpot,
                 CustomSkillId.SeraphimFlap,
@@ -612,8 +612,8 @@ namespace Arrowgene.Ddon.Shared.Model
                 CustomSkillId.CuringSpotP,
                 CustomSkillId.DefenseRiserP,
                 CustomSkillId.DefenseRiserT,
-            ]},
-			{Model.JobId.ShieldSage,[
+            ],
+			[Model.JobId.ShieldSage] = [
                 CustomSkillId.ForceShield,
                 CustomSkillId.HolyWall,
                 CustomSkillId.SlowLight,
@@ -636,8 +636,8 @@ namespace Arrowgene.Ddon.Shared.Model
                 CustomSkillId.RampartRaidT,
                 CustomSkillId.HolyWallP,
                 CustomSkillId.HolyWallT,
-            ]},
-			{Model.JobId.Sorcerer,[
+            ],
+			[Model.JobId.Sorcerer] = [
                 CustomSkillId.Firestorm,
                 CustomSkillId.Comestion,
                 CustomSkillId.Bolide,
@@ -660,8 +660,8 @@ namespace Arrowgene.Ddon.Shared.Model
                 CustomSkillId.ComestionT,
                 CustomSkillId.FrigorP,
                 CustomSkillId.FrigorT,
-            ]},
-			{Model.JobId.Warrior,[
+            ],
+			[Model.JobId.Warrior] = [
                 CustomSkillId.UpwardStrike,
                 CustomSkillId.PommelStrike,
                 CustomSkillId.SavageLunge,
@@ -684,8 +684,8 @@ namespace Arrowgene.Ddon.Shared.Model
                 CustomSkillId.EscapeSlashT,
                 CustomSkillId.SparkSlashP,
                 CustomSkillId.SparkSlashT,
-            ]},
-			{Model.JobId.ElementArcher,[
+            ],
+			[Model.JobId.ElementArcher] = [
                 CustomSkillId.HealingBolt,
                 CustomSkillId.CuringBolt,
                 CustomSkillId.FlamingBow,
@@ -708,8 +708,8 @@ namespace Arrowgene.Ddon.Shared.Model
                 CustomSkillId.HealingFlashT,
                 CustomSkillId.CripplingBowP,
                 CustomSkillId.CripplingBowT,
-            ]},
-			{Model.JobId.Alchemist,[
+            ],
+			[Model.JobId.Alchemist] = [
                 CustomSkillId.AlmaWave,
                 CustomSkillId.AlmaPillar,
                 CustomSkillId.PileBinder,
@@ -730,8 +730,8 @@ namespace Arrowgene.Ddon.Shared.Model
                 CustomSkillId.AlmaWaveT,
                 CustomSkillId.RexElementaP,
                 CustomSkillId.RexElementaT,
-            ]},
-			{Model.JobId.SpiritLancer,[
+            ],
+			[Model.JobId.SpiritLancer] = [
                 CustomSkillId.AuromFang,
                 CustomSkillId.AuromSlay,
                 CustomSkillId.CorrStorm,
@@ -750,8 +750,8 @@ namespace Arrowgene.Ddon.Shared.Model
                 CustomSkillId.CorrSpikeT,
                 CustomSkillId.CureGlastaP,
                 CustomSkillId.CureGlastaT,
-            ]},
-			{Model.JobId.HighScepter,[
+            ],
+			[Model.JobId.HighScepter] = [
                 CustomSkillId.FullMoonLight,
                 CustomSkillId.WallBarrier,
                 CustomSkillId.EclipseBright,
@@ -760,7 +760,7 @@ namespace Arrowgene.Ddon.Shared.Model
                 CustomSkillId.TerrorBlast,
                 CustomSkillId.PhantomEdge,
                 CustomSkillId.DimSlice,
-            ]}
+            ]
 		};
 
         public static readonly Dictionary<(JobId, uint), CustomSkillId> gJobIdReleaseIdCustomSkillMap =

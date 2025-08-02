@@ -65,7 +65,6 @@ namespace Arrowgene.Ddon.Database.Sql.Core.Migration
 
                        var ability = new Ability();
                        ability.AbilityLv = db.GetByte(reader, "ability_lv");
-                       //ability.Job = (JobId) db.GetByte(reader, "job");
                        ability.AbilityId =(AbilityId)db.GetUInt32(reader, "ability_id");
                        abilityMap[characterCommonId].Add(ability);
                    }

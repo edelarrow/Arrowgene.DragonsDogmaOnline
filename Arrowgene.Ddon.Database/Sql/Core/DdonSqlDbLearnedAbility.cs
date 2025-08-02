@@ -35,7 +35,6 @@ public partial class DdonSqlDb : SqlDb
     private Ability ReadLearnedAbility(DbDataReader reader)
     {
         Ability ability = new();
-        //ability.Job = (JobId)GetByte(reader, "job");
         ability.AbilityId = (AbilityId)GetUInt32(reader, "ability_id");
         ability.AbilityLv = GetByte(reader, "ability_lv");
         return ability;
