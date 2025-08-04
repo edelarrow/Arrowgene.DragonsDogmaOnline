@@ -1,9 +1,9 @@
-using Arrowgene.Ddon.GameServer.Dump;
 using Arrowgene.Ddon.GameServer.Shop;
 using Arrowgene.Ddon.Server;
-using Arrowgene.Ddon.Shared.Entity;
 using Arrowgene.Ddon.Shared.Entity.PacketStructure;
+using Arrowgene.Ddon.Shared.Model;
 using Arrowgene.Logging;
+using System.Linq;
 
 namespace Arrowgene.Ddon.GameServer.Handler
 {
@@ -17,20 +17,18 @@ namespace Arrowgene.Ddon.GameServer.Handler
 
         public override S2CEquipEnhancedGetPacksRes Handle(GameClient client, C2SEquipEnhancedGetPacksReq request)
         {
-            S2CEquipEnhancedGetPacksRes res;
-            if (request.Unk0 == 1)
+            S2CEquipEnhancedGetPacksRes res = new();
+
+            // TODO: Figure out Ultimate Synthesis.
+            // The response needs to be structured differently to get items to show up? Might be the item data in Unk8?
+
+            res.ParamList = request.EnhanceType switch
             {
-                var limitBreakAsset = Server.AssetRepository.LimitBreakAsset;
-                res = new S2CEquipEnhancedGetPacksRes()
-                {
-                    ParamList = limitBreakAsset.ToLotteryExampleList()
-                };
-            }
-            else
-            {
-                res = EntitySerializer.Get<S2CEquipEnhancedGetPacksRes>().Read(InGameDump.data_Dump_111);
-            }
-                
+                EquipEnhanceType.LimitBreak => Server.AssetRepository.LimitBreakAsset.ToLotteryExampleList(),
+                EquipEnhanceType.UltimateSynthesis => throw new ResponseErrorException(ErrorCode.ERROR_CODE_NOT_IMPLEMENTED, "Ultimate Synthesis is not implemented yet."),
+                EquipEnhanceType.AdditionalCraftMaterial => [.. Server.AssetRepository.CraftAddStatusAsset.AddStatuses.Values.Select(x => x.CDataEquipEnhanceLotteryOption)],
+                _ => throw new ResponseErrorException(ErrorCode.ERROR_CODE_NOT_IMPLEMENTED, "Unknown EquipEnhanceType."),
+            };
             return res;
         }
     }
