@@ -327,7 +327,7 @@ namespace Arrowgene.Ddon.Shared.Model
                 {
                     ItemId = (ushort) x.ItemId,
                     ColorNo = x.Color,
-                    PlusValue = x.SafetySetting,
+                    PlusValue = x.PlusValue,
                     EquipElementParamList = x.EquipElementParamList,
                     AddStatusParamList = x.AddStatusParamList,
                 })
