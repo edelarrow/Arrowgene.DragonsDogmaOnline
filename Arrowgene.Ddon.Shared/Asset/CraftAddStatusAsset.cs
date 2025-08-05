@@ -16,26 +16,27 @@ namespace Arrowgene.Ddon.Shared.Asset
         public List<CDataItemAmount> ItemCost { get; set; } = [];
 
         public CDataEquipEnhanceLotteryOption CDataEquipEnhanceLotteryOption
-        { get => new()
         {
-            Index = Index,
-            Category = Category,
-            ItemCost = ItemCost,
-            ShopTypeListings = [ new(1) ],
-            MainSuccessExample = [
-                new()
-                {
-                    Unk0 = 1,
-                    EffectParamList = [
-                        new() {
-                            BuffId = BuffId,
-                            Unk1 = 100,
-                            Unk2 = 1,
-                        }
-                    ]
-                }
-            ]
-        };
+            get => new()
+            {
+                Index = Index,
+                Category = Category,
+                ItemCost = ItemCost,
+                ShopTypeListings = [new(1)],
+                MainSuccessExample = [
+                    new()
+                    {
+                        Unk0 = 1,
+                        EffectParamList = [
+                            new() {
+                                BuffId = BuffId,
+                                Unk1 = 100,
+                                Unk2 = 1,
+                            }
+                        ]
+                    }
+                ]
+            };
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Arrowgene.Ddon.Database.Sql.Core.Migration
 
         public bool Migrate(IDatabase db, DbConnection conn)
         {
-            string adaptedSchema = DdonDatabaseBuilder.GetAdaptedSchema(databaseSetting, "Script/migration_equipment_limit_break_datatype.sql.sql");
+            string adaptedSchema = DdonDatabaseBuilder.GetAdaptedSchema(databaseSetting, "Script/migration_equipment_limit_break_datatype.sql");
             db.Execute(conn, adaptedSchema, true);
             return true;
         }

@@ -155,7 +155,6 @@ namespace Arrowgene.Ddon.GameServer.Handler
                     Unk0 = new()
                     {
                         IsGreatSuccess = isGreatSuccessEquipmentQuality,
-                        Unk1 = Server.AssetRepository.CraftAddStatusAsset.AddStatuses.GetValueOrDefault(request.AddStatusID)?.BuffId ?? 0, // ???
                     },
                     AddStatusDataList = equipItem.AddStatusParamList,
                     CurrentEquip = currentEquipInfo

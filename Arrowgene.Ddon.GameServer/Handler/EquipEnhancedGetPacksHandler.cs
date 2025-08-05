@@ -22,13 +22,20 @@ namespace Arrowgene.Ddon.GameServer.Handler
             // TODO: Figure out Ultimate Synthesis.
             // The response needs to be structured differently to get items to show up? Might be the item data in Unk8?
 
-            res.ParamList = request.EnhanceType switch
+            switch (request.EnhanceType)
             {
-                EquipEnhanceType.LimitBreak => Server.AssetRepository.LimitBreakAsset.ToLotteryExampleList(),
-                EquipEnhanceType.UltimateSynthesis => throw new ResponseErrorException(ErrorCode.ERROR_CODE_NOT_IMPLEMENTED, "Ultimate Synthesis is not implemented yet."),
-                EquipEnhanceType.AdditionalCraftMaterial => [.. Server.AssetRepository.CraftAddStatusAsset.AddStatuses.Values.Select(x => x.CDataEquipEnhanceLotteryOption)],
-                _ => throw new ResponseErrorException(ErrorCode.ERROR_CODE_NOT_IMPLEMENTED, "Unknown EquipEnhanceType."),
-            };
+                case EquipEnhanceType.LimitBreak:
+                    res.ParamList = Server.AssetRepository.LimitBreakAsset.ToLotteryExampleList();
+                    break;
+                case EquipEnhanceType.UltimateSynthesis:
+                    throw new ResponseErrorException(ErrorCode.ERROR_CODE_NOT_IMPLEMENTED, "Ultimate Synthesis is not implemented yet.");
+                case EquipEnhanceType.AdditionalCraftMaterial:
+                    res.ParamList = [.. Server.AssetRepository.CraftAddStatusAsset.AddStatuses.Values.Select(x => x.CDataEquipEnhanceLotteryOption)];
+                    break;
+                default:
+                    throw new ResponseErrorException(ErrorCode.ERROR_CODE_NOT_IMPLEMENTED, "Unknown EquipEnhanceType.");
+            }
+
             return res;
         }
     }

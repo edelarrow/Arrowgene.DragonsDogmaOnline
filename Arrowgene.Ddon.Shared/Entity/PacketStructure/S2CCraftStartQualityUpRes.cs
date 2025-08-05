@@ -16,8 +16,6 @@ namespace Arrowgene.Ddon.Shared.Entity.PacketStructure
             CurrentEquip = new CDataCurrentEquipInfo();            
         }
 
-        // TODO: figuring out what this is
-        // I've tried plugging Crest IDs & Equipment ID/RandomQuality n such, and just random numbers Unk0 - Unk4 just don't seem to change anything.
         public CDataS2CCraftStartQualityUpResUnk0 Unk0 { get; set; } // I'm thinking this is AddStatus
         public List<CDataAddStatusParam> AddStatusDataList { get; set; } // I think this is Craigs Limit break?
         public CDataCurrentEquipInfo CurrentEquip { get; set; }
