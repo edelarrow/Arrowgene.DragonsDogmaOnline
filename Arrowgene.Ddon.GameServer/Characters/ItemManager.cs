@@ -588,7 +588,7 @@ namespace Arrowgene.Ddon.GameServer.Characters
                 database.ReplaceStorageItem(character.ContentCharacterId, destinationStorageType, slot, newItemNum, item, connectionIn);
                 if (BitterblackMazeManager.IsMazeReward(item.ItemId))
                 {
-                    item = BitterblackMazeManager.ApplyCrest(database, character, item, connectionIn);
+                    item = _Server.BitterblackMazeManager.ApplyCrest(character, item, connectionIn);
                 }
                 else if (_Server.JobEmblemManager.IsEmblemItem((ItemId) item.ItemId))
                 {
@@ -648,7 +648,7 @@ namespace Arrowgene.Ddon.GameServer.Characters
                 database.ReplaceStorageItem(character.ContentCharacterId, destinationStorageType, slot, newItemNum, item, connectionIn);
                 if (BitterblackMazeManager.IsMazeReward(item.ItemId))
                 {
-                    item = BitterblackMazeManager.ApplyCrest(database, character, item, connectionIn);
+                    item = _Server.BitterblackMazeManager.ApplyCrest(character, item, connectionIn);
                 }
 
                 CDataItemUpdateResult result = new CDataItemUpdateResult();

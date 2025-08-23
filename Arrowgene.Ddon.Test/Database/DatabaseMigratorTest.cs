@@ -531,6 +531,10 @@ namespace Arrowgene.Ddon.Test.Database
         public List<CDataPawnHistory> SelectPawnHistory(uint pawnId, DbConnection? connectionIn = null) { return []; }
         public CDataPawnTotalScore SelectPawnTotalScore(uint pawnId, DbConnection? connectionIn = null) { return new(); }
 
+        public HashSet<uint> SelectDispelSeals(uint characterId, DbConnection? connectionIn = null) { return []; }
+        public bool InsertDispelSeal(uint characterId, uint sealIndex, DbConnection? connectionIn = null) { return true; }
+        public bool DeleteDispelSeal(uint characterId, uint sealIndex, DbConnection? connectionIn = null) { return true; }
+
         public bool UpsertEquipJobItem(string itemUId, uint commonId, JobId job, ushort slotNo, DbConnection? connectionIn = null) { return true; }
 
         public void AddParameter(DbCommand command, string name, object? value, DbType type) { }

@@ -581,4 +581,9 @@ public interface IDatabase
     List<CDataPawnHistory> SelectPawnHistory(uint pawnId, DbConnection? connectionIn = null);
     CDataPawnTotalScore SelectPawnTotalScore(uint pawnId, DbConnection? connectionIn = null);
 
+    // Dispel Seals
+    HashSet<uint> SelectDispelSeals(uint characterId, DbConnection? connectionIn = null);
+    bool InsertDispelSeal(uint characterId, uint sealIndex, DbConnection? connectionIn = null);
+    bool DeleteDispelSeal(uint characterId, uint sealIndex, DbConnection? connectionIn = null);
+
 }

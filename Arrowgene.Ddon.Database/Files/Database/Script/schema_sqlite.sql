@@ -1066,3 +1066,11 @@ CREATE TABLE IF NOT EXISTS "ddon_rental_pawn_feedback"
     "craft_comment"               TINYINT,
     CONSTRAINT "fk_ddon_rental_pawn_feedback_pawn_id" FOREIGN KEY ("pawn_id") REFERENCES "ddon_pawn" ("pawn_id") ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS "ddon_dispel_seals"
+(
+    "character_id"              INTEGER NOT NULL,
+    "seal_index"                INTEGER NOT NULL,
+    CONSTRAINT "pk_ddon_dispel_seals" PRIMARY KEY ("character_id", "seal_index"),
+    CONSTRAINT "fk_ddon_dispel_seals_character_id" FOREIGN KEY ("character_id") references "ddon_character" ("character_id") ON DELETE CASCADE
+)

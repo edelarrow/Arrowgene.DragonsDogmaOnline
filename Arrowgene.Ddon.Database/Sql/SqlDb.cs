@@ -622,6 +622,11 @@ public abstract class SqlDb : IDatabase
     public abstract List<CDataPawnHistory> SelectPawnHistory(uint pawnId, DbConnection? connectionIn = null);
     public abstract CDataPawnTotalScore SelectPawnTotalScore(uint pawnId, DbConnection? connectionIn = null);
 
+    public abstract HashSet<uint> SelectDispelSeals(uint characterId, DbConnection? connectionIn = null);
+    public abstract bool InsertDispelSeal(uint characterId, uint sealIndex, DbConnection? connectionIn = null);
+    public abstract bool DeleteDispelSeal(uint characterId, uint sealIndex, DbConnection? connectionIn = null);
+
+
     protected virtual DbCommand Command(string query, DbConnection connection)
     {
         throw new NotImplementedException("This is driver-dependent and must be implemented.");
