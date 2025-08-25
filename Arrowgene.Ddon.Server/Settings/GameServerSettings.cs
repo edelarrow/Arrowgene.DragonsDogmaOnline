@@ -1712,5 +1712,22 @@ namespace Arrowgene.Ddon.Server.Settings
             }
         }
         private const uint _DispelSealResetRate = 500;
+
+        /// <summary>
+        /// The number of reset tickets given for BBM weekly.
+        /// </summary>
+        [DefaultValue(_BBMWeeklyResetTickets)]
+        public uint BBMWeeklyResetTickets
+        {
+            set
+            {
+                SetSetting("BBMWeeklyResetTickets", value);
+            }
+            get
+            {
+                return TryGetSetting("BBMWeeklyResetTickets", _BBMWeeklyResetTickets);
+            }
+        }
+        private const uint _BBMWeeklyResetTickets = 3;
     }
 }

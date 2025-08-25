@@ -402,28 +402,20 @@ public interface IDatabase
     bool RemoveBBMProgress(uint characterId);
 
     // Bitterblack Maze Rewards
-    bool InsertBBMRewards(uint characterId, uint goldMarks, uint silverMarks, uint redMarks);
-    bool UpdateBBMRewards(uint characterId, BitterblackMazeRewards rewards, DbConnection? connectionIn = null);
-    bool RemoveBBMRewards(uint characterId);
-    BitterblackMazeRewards SelectBBMRewards(uint characterId, DbConnection? connectionIn = null);
+    bool InsertBBMRewards(uint characterId, uint goldMarks, uint silverMarks, uint redMarks, uint stageId, DbConnection? connectionIn = null);
+    bool UpdateBBMRewards(uint characterId, BitterblackMazeMarkRewards rewards, DbConnection? connectionIn = null);
+    bool RemoveBBMRewards(uint characterId, DbConnection? connectionIn = null);
+    Dictionary<uint, BitterblackMazeMarkRewards> SelectBBMRewards(uint characterId, DbConnection? connectionIn = null);
+    bool ResetBBMResetTicketStatus(DbConnection? connectionIn = null);
+    bool InsertBBMResetTicketStatus(uint characterId, DbConnection? connectionIn = null);
+
 
     // Bitterblack Maze Treasure
     bool InsertBBMContentTreasure(
-        uint characterId,
-        BitterblackMazeTreasure treasure,
+        uint characterId, uint stageId, uint groupId, uint index,
         DbConnection? connectionIn = null
     );
-
-    bool InsertBBMContentTreasure(
-        uint characterId,
-        uint contentId,
-        uint amount,
-        DbConnection? connectionIn = null
-    );
-
-    bool UpdateBBMContentTreasure(uint characterId, BitterblackMazeTreasure treasure);
-    bool UpdateBBMContentTreasure(uint characterId, uint contentId, uint amount);
-    bool RemoveBBMContentTreasure(uint characterId);
+    bool RemoveBBMContentTreasure(uint characterId, DbConnection? connectionIn = null);
     List<BitterblackMazeTreasure> SelectBBMContentTreasure(uint characterId, DbConnection? connectionIn = null);
 
     // Clan

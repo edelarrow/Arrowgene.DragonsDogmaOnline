@@ -1,3 +1,4 @@
+using Arrowgene.Ddon.GameServer.Scripting.Interfaces;
 using Arrowgene.Ddon.Server;
 using Arrowgene.Ddon.Shared.Entity.PacketStructure;
 using Arrowgene.Ddon.Shared.Entity.Structure;
@@ -24,16 +25,16 @@ namespace Arrowgene.Ddon.GameServer.Handler
             {
                 Unk0 = new CDataResetInfoUnk0()
                 {
-                    Unk0 = 3, // Shows up in next packet Unk0
+                    Unk0 = 1, // Shows up in next packet Unk0
                 },
-                WalletPoints = new List<CDataWalletPoint>()
-                {
-                    new CDataWalletPoint()
+                WalletPoints =
+                [
+                    new()
                     {
                         Type = WalletType.BitterblackMazeResetTicket,
                         Value = 1,
                     },
-                }
+                ]
             });
 
             return result;
