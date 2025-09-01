@@ -1,10 +1,8 @@
-using Arrowgene.Ddon.GameServer.Scripting.Interfaces;
 using Arrowgene.Ddon.Server;
 using Arrowgene.Ddon.Shared.Entity.PacketStructure;
 using Arrowgene.Ddon.Shared.Entity.Structure;
 using Arrowgene.Ddon.Shared.Model;
 using Arrowgene.Logging;
-using System.Collections.Generic;
 
 namespace Arrowgene.Ddon.GameServer.Handler
 {
@@ -18,20 +16,39 @@ namespace Arrowgene.Ddon.GameServer.Handler
 
         public override S2CBattleContentResetInfoRes Handle(GameClient client, C2SBattleContentResetInfoReq request)
         {
-            // Seems only Unk0.Unk0 and WalletPoints does anything for BBM?
-
             var result = new S2CBattleContentResetInfoRes();
             result.ResetInfoList.Add(new CDataResetInfo()
             {
                 Unk0 = new CDataResetInfoUnk0()
                 {
-                    Unk0 = 1, // Shows up in next packet Unk0
+                    Index = 1
                 },
                 WalletPoints =
                 [
                     new()
                     {
                         Type = WalletType.BitterblackMazeResetTicket,
+                        Value = 1,
+                    }
+                ]
+            });
+
+            result.ResetInfoList.Add(new CDataResetInfo()
+            {
+                Unk0 = new CDataResetInfoUnk0()
+                {
+                    Index = 2, // Shows up in next packet Unk0
+                    IsPremium1 = true,
+                    IsPremium2 = true,
+                },
+                TrackUses = true,
+                MaxUses = 1000, // TODO: Default 6; expose and make configurable?
+                CurrentUses = 0, // TODO: Track this weekly and reset on Monday.
+                WalletPoints =
+                [
+                    new()
+                    {
+                        Type = WalletType.GoldenGemstones,
                         Value = 1,
                     },
                 ]

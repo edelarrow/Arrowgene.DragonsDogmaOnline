@@ -85,8 +85,8 @@ namespace Arrowgene.Ddon.GameServer.Characters
                     GameMode = GameMode.BitterblackMaze,
                     ContentId = progress.ContentId,
                     StartTime = progress.StartTime,
-                    RewardBonus = BattleContentRewardBonus.Normal,
-                    RewardReceived = !availableRewards.All(x => x.Amount == 0),
+                    RewardBonus = BattleContentRewardBonus.Normal, // This gets set to UP when resetting with GG.
+                    RewardReceived = rewards.Count > 0 && rewards.Sum(x => x.Value.RedMarks) == 0,
                     ReportSearchResults = ShouldReportSearchResults(progress, rewards.Values), // This needs to be set after killing last boss? (or maybe between tiers if you exit?)
                     ReportReset = ShouldReportProgress(progress),
                     Unk7 = 23, // Value from pcap, not sure what it does

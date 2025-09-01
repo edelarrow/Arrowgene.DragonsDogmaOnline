@@ -45,7 +45,7 @@ namespace Arrowgene.Ddon.GameServer.Handler
         public override S2CBattleContentContentResetRes Handle(GameClient client, C2SBattleContentContentResetReq request)
         {
             PacketQueue queue = new();
-            bool isPaidRequest = request.Unk0 > 0;
+            bool isPaidRequest = request.ResetIndex > 0;
 
             S2CItemUpdateCharacterItemNtc updateCharacterItemNtc = new S2CItemUpdateCharacterItemNtc();
 
@@ -73,12 +73,17 @@ namespace Arrowgene.Ddon.GameServer.Handler
 
                 if (isPaidRequest)
                 {
-                    // Pay ticket cost. TODO: Golden Gemstone payment?
-                    switch (request.Unk0)
+                    // Pay ticket cost.
+                    switch (request.ResetIndex)
                     {
                         case 1:
                             updateCharacterItemNtc.UpdateWalletList.Add(Server.WalletManager.RemoveFromWallet(client.Character, WalletType.BitterblackMazeResetTicket, 1, connection));
                             break;
+                        case 2:
+                            // TODO: Do all the premium reset stuff; better starting gear (IR 11, e.g. Sublime Set) and rewards. 
+                            updateCharacterItemNtc.UpdateWalletList.Add(Server.WalletManager.RemoveFromWallet(client.Character, WalletType.GoldenGemstones, 1, connection));
+                            break;
+
                     }
 
                     // Reset mark reward tracking

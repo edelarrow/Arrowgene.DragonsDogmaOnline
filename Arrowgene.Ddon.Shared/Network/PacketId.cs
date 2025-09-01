@@ -2125,7 +2125,7 @@ namespace Arrowgene.Ddon.Shared.Network
         public static readonly PacketId S2C_BATTLE_CONTENT_PHASE_ENTRY_GET_RECRUITMENT_STATE_RES = new PacketId(71, 9, 2, "S2C_BATTLE_CONTENT_PHASE_ENTRY_GET_RECRUITMENT_STATE_RES", ServerType.Game, PacketSource.Server); // 一斉ステージ移動待ち受け状態取得に
         public static readonly PacketId C2S_BATTLE_CONTENT_PHASE_ENTRY_READY_REQ = new PacketId(71, 10, 1, "C2S_BATTLE_CONTENT_PHASE_ENTRY_READY_REQ", ServerType.Game, PacketSource.Client);
         public static readonly PacketId S2C_BATTLE_CONTENT_PHASE_ENTRY_READY_RES = new PacketId(71, 10, 2, "S2C_BATTLE_CONTENT_PHASE_ENTRY_READY_RES", ServerType.Game, PacketSource.Server); // 一斉ステージ移動準備に
-        public static readonly PacketId S2C_BATTLE_CONTENT_PHASE_ENTRY_READY_NTC = new PacketId(71, 10, 16, "S2C_BATTLE_CONTENT_PHASE_ENTRY_READY_NTC", ServerType.Game, PacketSource.Server, "S2C_BATTLE_71_10_16_NTC";
+        public static readonly PacketId S2C_BATTLE_CONTENT_PHASE_ENTRY_READY_NTC = new PacketId(71, 10, 16, "S2C_BATTLE_CONTENT_PHASE_ENTRY_READY_NTC", ServerType.Game, PacketSource.Server, "S2C_BATTLE_71_10_16_NTC");
         public static readonly PacketId C2S_BATTLE_CONTENT_PHASE_ENTRY_READY_CANCEL_REQ = new PacketId(71, 11, 1, "C2S_BATTLE_CONTENT_PHASE_ENTRY_READY_CANCEL_REQ", ServerType.Game, PacketSource.Client);
         public static readonly PacketId S2C_BATTLE_CONTENT_PHASE_ENTRY_READY_CANCEL_RES = new PacketId(71, 11, 2, "S2C_BATTLE_CONTENT_PHASE_ENTRY_READY_CANCEL_RES", ServerType.Game, PacketSource.Server); // 一斉ステージ移動準備キャンセルに
         public static readonly PacketId S2C_BATTLE_CONTENT_AREA_CHANGE_NTC = new PacketId(71, 12, 16, "S2C_BATTLE_CONTENT_AREA_CHANGE_NTC", ServerType.Game, PacketSource.Server, "S2C_BATTLE_71_12_16_NTC");
