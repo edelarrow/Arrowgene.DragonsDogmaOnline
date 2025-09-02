@@ -56,7 +56,7 @@ namespace Arrowgene.Ddon.GameServer.Characters
 
         public static uint RollBitterBlackMazeBraceletCrest(HashSet<uint> seals)
         {
-            List<uint> rolls = [.. BitterBlackMazeRewards.AppraisalData.Where(x => x.BaseItem == ItemId.BitterblackEarring
+            List<uint> rolls = [.. BitterBlackMazeRewards.AppraisalData.Where(x => x.BaseItem == ItemId.BitterblackBracelet
                 && !seals.Contains(x.SealIndex))
                 .Select(x => (uint)x.CrestId)];
             if (rolls.Count != 0)

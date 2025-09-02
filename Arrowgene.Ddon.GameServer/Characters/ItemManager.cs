@@ -43,7 +43,17 @@ namespace Arrowgene.Ddon.GameServer.Characters
             StorageType.StorageBoxNormal, StorageType.StorageBoxExpansion,
             StorageType.StorageChestDrawer1, StorageType.StorageChestDrawer2, StorageType.StorageChestDrawer3
         };
-        public static readonly List<StorageType> BbmEmbodyStorages = new List<StorageType> { StorageType.StorageBoxNormal, StorageType.ItemBagConsumable, StorageType.ItemBagMaterial, StorageType.ItemBagEquipment, StorageType.ItemBagJob };
+
+        public static readonly List<StorageType> BbmEmbodyStorages =
+        [
+            StorageType.StorageBoxNormal, 
+            StorageType.ItemBagConsumable,
+            StorageType.ItemBagMaterial, 
+            StorageType.ItemBagEquipment, 
+            StorageType.ItemBagJob,
+            StorageType.CharacterEquipment,
+            StorageType.PawnEquipment, // Maybe?
+        ];
 
         private static readonly Dictionary<ItemId, (WalletType Type, uint Quantity)> ItemIdWalletTypeAndQuantity = new Dictionary<ItemId, (WalletType Type, uint Amount)>() {
             {ItemId.CoinPouch1G, (WalletType.Gold, 1)},
