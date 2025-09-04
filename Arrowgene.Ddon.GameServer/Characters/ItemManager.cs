@@ -51,8 +51,7 @@ namespace Arrowgene.Ddon.GameServer.Characters
             StorageType.ItemBagMaterial, 
             StorageType.ItemBagEquipment, 
             StorageType.ItemBagJob,
-            StorageType.CharacterEquipment,
-            StorageType.PawnEquipment, // Maybe?
+            StorageType.CharacterEquipment
         ];
 
         private static readonly Dictionary<ItemId, (WalletType Type, uint Quantity)> ItemIdWalletTypeAndQuantity = new Dictionary<ItemId, (WalletType Type, uint Amount)>() {

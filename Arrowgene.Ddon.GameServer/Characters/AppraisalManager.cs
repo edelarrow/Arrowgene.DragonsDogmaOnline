@@ -39,7 +39,7 @@ namespace Arrowgene.Ddon.GameServer.Characters
 
         public static uint RollBitterBlackMazeEarringCrest(HashSet<uint> seals, JobId jobId)
         {
-            List<uint> rolls = [.. BitterBlackMazeRewards.AppraisalData.Where(x => x.BaseItem == ItemId.BitterblackEarring
+            List<uint> rolls = [.. BitterblackMazeRewards.AppraisalData.Where(x => x.BaseItem == ItemId.BitterblackEarring
                 && x.SpecificJob == jobId
                 && !seals.Contains(x.SealIndex))
                 .Select(x => (uint)x.CrestId)];
@@ -56,7 +56,7 @@ namespace Arrowgene.Ddon.GameServer.Characters
 
         public static uint RollBitterBlackMazeBraceletCrest(HashSet<uint> seals)
         {
-            List<uint> rolls = [.. BitterBlackMazeRewards.AppraisalData.Where(x => x.BaseItem == ItemId.BitterblackBracelet
+            List<uint> rolls = [.. BitterblackMazeRewards.AppraisalData.Where(x => x.BaseItem == ItemId.BitterblackBracelet
                 && !seals.Contains(x.SealIndex))
                 .Select(x => (uint)x.CrestId)];
             if (rolls.Count != 0)

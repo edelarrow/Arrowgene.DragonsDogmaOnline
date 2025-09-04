@@ -491,6 +491,9 @@ public abstract class SqlDb : IDatabase
     public abstract Dictionary<uint, BitterblackMazeMarkRewards> SelectBBMRewards(uint characterId, DbConnection? connectionIn = null);
     public abstract bool ResetBBMResetTicketStatus(DbConnection? connectionIn = null);
     public abstract bool InsertBBMResetTicketStatus(uint characterId, DbConnection? connectionIn = null);
+    public abstract uint SelectBBMGGReset(uint characterId, DbConnection? connectionIn = null);
+    public abstract bool InsertBBMGGReset(uint characterId, DbConnection? connectionIn = null);
+    public abstract bool ResetBBMGGReset(DbConnection? connectionIn = null);
     public abstract bool InsertBBMContentTreasure(uint characterId, uint stageId, uint groupId, uint index, DbConnection? connectionIn = null);
     public abstract bool RemoveBBMContentTreasure(uint characterId, DbConnection? connectionIn = null);
     public abstract List<BitterblackMazeTreasure> SelectBBMContentTreasure(uint characterId, DbConnection? connectionIn = null);

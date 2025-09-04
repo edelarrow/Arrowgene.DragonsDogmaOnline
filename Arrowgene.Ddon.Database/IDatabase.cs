@@ -408,6 +408,9 @@ public interface IDatabase
     Dictionary<uint, BitterblackMazeMarkRewards> SelectBBMRewards(uint characterId, DbConnection? connectionIn = null);
     bool ResetBBMResetTicketStatus(DbConnection? connectionIn = null);
     bool InsertBBMResetTicketStatus(uint characterId, DbConnection? connectionIn = null);
+    uint SelectBBMGGReset(uint characterId, DbConnection? connectionIn = null);
+    bool InsertBBMGGReset(uint characterId, DbConnection? connectionIn = null);
+    bool ResetBBMGGReset(DbConnection? connectionIn = null);
 
 
     // Bitterblack Maze Treasure

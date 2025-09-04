@@ -706,7 +706,7 @@ CREATE TABLE IF NOT EXISTS "ddon_bbm_rewards"
     "silver_marks" INTEGER             NOT NULL,
     "red_marks"    INTEGER             NOT NULL,
     "stage_id"     INTEGER             NOT NULL,
-    CONSTRAINT "pk_ddon_bbm_rewards" PRIMARY KEY ("character_id", "source_type"),
+    CONSTRAINT "pk_ddon_bbm_rewards" PRIMARY KEY ("character_id", "stage_id"),
     CONSTRAINT "fk_ddon_bbm_rewards_character_id" FOREIGN KEY ("character_id") REFERENCES "ddon_character" ("character_id") ON DELETE CASCADE
 );
 
@@ -1084,6 +1084,14 @@ CREATE TABLE IF NOT EXISTS "ddon_bbm_reset_ticket"
     "character_id"              INTEGER NOT NULL,
     CONSTRAINT "pk_ddon_bbm_reset_ticket" PRIMARY KEY ("character_id"),
     CONSTRAINT "fk_ddon_bbm_reset_ticket_character_id" FOREIGN KEY ("character_id") references "ddon_character" ("character_id") ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS "ddon_bbm_reset_gg"
+(
+    "character_id"  INTEGER NOT NULL,
+    "reset_count"   INTEGER NOT NULL,
+    CONSTRAINT "pk_ddon_bbm_reset_gg_ticket" PRIMARY KEY ("character_id"),
+    CONSTRAINT "fk_ddon_bbm_reset_gg_ticket_character_id" FOREIGN KEY ("character_id") references "ddon_character" ("character_id") ON DELETE CASCADE
 );
 
 INSERT INTO "ddon_schedule_next"(type, timestamp)

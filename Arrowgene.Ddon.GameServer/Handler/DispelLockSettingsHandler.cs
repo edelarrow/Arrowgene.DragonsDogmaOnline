@@ -71,7 +71,7 @@ namespace Arrowgene.Ddon.GameServer.Handler
 
             return new()
             {
-                Unk0 = [.. BitterBlackMazeRewards.SealUIData.Select(x => new CDataDispelLockSettingUpdate()
+                Unk0 = [.. BitterblackMazeRewards.SealUIData.Select(x => new CDataDispelLockSettingUpdate()
                 {
                     SealIndex = x.SealIndex,
                     LockStatus = client.Character.DispelSeals.Contains(x.SealIndex)

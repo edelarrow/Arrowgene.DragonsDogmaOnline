@@ -87,7 +87,7 @@ namespace Arrowgene.Ddon.Shared.Model.Appraisal
                             }
                             break;
                         case AppraisalCrestType.BitterBlackBracelet:
-                            foreach (var roll in BitterBlackMazeRewards.AppraisalData.Where(x => x.BaseItem == ItemId.BitterblackBracelet
+                            foreach (var roll in BitterblackMazeRewards.AppraisalData.Where(x => x.BaseItem == ItemId.BitterblackBracelet
                                 && !seals.Contains(x.SealIndex)))
                             {
                                 item.CrestLot.Add(new CDataDispelLotCrest()
@@ -97,7 +97,7 @@ namespace Arrowgene.Ddon.Shared.Model.Appraisal
                             }
                             break;
                         case AppraisalCrestType.BitterBlackEarring:
-                            foreach (var roll in BitterBlackMazeRewards.AppraisalData
+                            foreach (var roll in BitterblackMazeRewards.AppraisalData
                                 .Where(x => x.BaseItem == ItemId.BitterblackEarring
                                             && x.SpecificJob == jobId
                                             && !seals.Contains(x.SealIndex)))

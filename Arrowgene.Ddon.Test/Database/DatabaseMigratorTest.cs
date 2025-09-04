@@ -391,6 +391,9 @@ namespace Arrowgene.Ddon.Test.Database
         public Dictionary<uint, BitterblackMazeMarkRewards> SelectBBMRewards(uint characterId, DbConnection? connectionIn = null) { return new(); }
         public bool ResetBBMResetTicketStatus(DbConnection? connectionIn = null) { return true; }
         public bool InsertBBMResetTicketStatus(uint characterId, DbConnection? connectionIn = null) { return true; }
+        public uint SelectBBMGGReset(uint characterId, DbConnection? connectionIn = null) { return 0; }
+        public bool InsertBBMGGReset(uint characterId, DbConnection? connectionIn = null) { return true; }
+        public bool ResetBBMGGReset(DbConnection? connectionIn = null) { return true; }
         public bool InsertBBMContentTreasure(uint characterId, uint stageId, uint groupId, uint index, DbConnection? connectionIn = null) { return true; }
         public bool RemoveBBMContentTreasure(uint characterId, DbConnection? connectionIn = null) { return true; }
         public List<BitterblackMazeTreasure> SelectBBMContentTreasure(uint characterId, DbConnection? connectionIn = null) { return new List<BitterblackMazeTreasure>(); }

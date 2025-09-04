@@ -42,8 +42,8 @@ namespace Arrowgene.Ddon.GameServer.Handler
                     IsPremium2 = true,
                 },
                 TrackUses = true,
-                MaxUses = 1000, // TODO: Default 6; expose and make configurable?
-                CurrentUses = 0, // TODO: Track this weekly and reset on Monday.
+                MaxUses = Server.GameSettings.GameServerSettings.BBMWeeklyGGResets,
+                CurrentUses = Server.Database.SelectBBMGGReset(client.Character.CharacterId),
                 WalletPoints =
                 [
                     new()

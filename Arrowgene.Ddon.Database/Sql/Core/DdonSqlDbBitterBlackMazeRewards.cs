@@ -23,6 +23,15 @@ public partial class DdonSqlDb : SqlDb
     private readonly string SqlInsertBBMResetTicket = "INSERT INTO \"ddon_bbm_reset_ticket\" (character_id) VALUES (@character_id) ON CONFLICT DO NOTHING;";
     private readonly string SqlResetBBMResetTicket = "DELETE FROM \"ddon_bbm_reset_ticket\";";
 
+    private readonly string SqlInsertBBMGGReset = @"
+        INSERT INTO ""ddon_bbm_reset_gg"" (character_id, reset_count)
+        VALUES (@character_id, 1)
+        ON CONFLICT (character_id)
+        DO UPDATE SET reset_count = reset_count + 1;
+    ";
+    private readonly string SqlResetBBMGGReset = "DELETE FROM \"ddon_bbm_reset_gg\";";
+    private readonly string SqlSelectBBMGGReset = "SELECT reset_count FROM \"ddon_bbm_reset_gg\" WHERE \"character_id\"=@character_id;";
+
     public override bool InsertBBMRewards(uint characterId, uint goldMarks, uint silverMarks, uint redMarks, uint stageId, DbConnection? connectionIn = null)
     {
         return ExecuteQuerySafe(connectionIn, connection =>
@@ -109,6 +118,48 @@ public partial class DdonSqlDb : SqlDb
         {
             return ExecuteNonQuery(connection,
                 SqlResetBBMResetTicket,
+                command => { }) > 0;
+        });
+    }
+
+    public override uint SelectBBMGGReset(uint characterId, DbConnection? connectionIn = null)
+    {
+        return ExecuteQuerySafe(connectionIn, connection =>
+        {
+            uint result = 0;
+            ExecuteReader(connection,
+                SqlSelectBBMGGReset,
+                command => { AddParameter(command, "character_id", characterId); },
+                reader =>
+                {
+                    if (reader.Read())
+                    {
+                        result = GetUInt32(reader, "reset_count");
+                    }
+                }
+            );
+
+            return result;
+        });
+    }
+
+    public override bool InsertBBMGGReset(uint characterId, DbConnection? connectionIn = null)
+    {
+        return ExecuteQuerySafe(connectionIn, connection =>
+        {
+            return ExecuteNonQuery(connection,
+                SqlInsertBBMGGReset,
+                command => { AddParameter(command, "@character_id", characterId); }
+            ) == 1;
+        });
+    }
+
+    public override bool ResetBBMGGReset(DbConnection? connectionIn = null)
+    {
+        return ExecuteQuerySafe(connectionIn, connection =>
+        {
+            return ExecuteNonQuery(connection,
+                SqlResetBBMGGReset,
                 command => { }) > 0;
         });
     }

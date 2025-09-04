@@ -31,7 +31,7 @@ namespace Arrowgene.Ddon.GameServer.Handler
 
             S2CDispelGetLockSettingRes res = new();
             res.MaxSeals = Server.GameSettings.GameServerSettings.DispelSealMax;
-            res.PageData = [.. BitterBlackMazeRewards.AppraisalData
+            res.PageData = [.. BitterblackMazeRewards.AppraisalData
                 .GroupBy(x => x.SealPage)
                 .OrderBy(x => x.Key)
                 .Select(x => new CDataDispelLockPageData()
@@ -55,7 +55,7 @@ namespace Arrowgene.Ddon.GameServer.Handler
                 Cost = Server.GameSettings.GameServerSettings.DispelSealCostRate,
             });
 
-            res.SealData = [.. BitterBlackMazeRewards.SealUIData
+            res.SealData = [.. BitterblackMazeRewards.SealUIData
                 .Select(x => new CDataDispelLockSealData()
                 {
                     SealIndex = x.SealIndex,

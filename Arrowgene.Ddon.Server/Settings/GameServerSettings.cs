@@ -1729,5 +1729,22 @@ namespace Arrowgene.Ddon.Server.Settings
             }
         }
         private const uint _BBMWeeklyResetTickets = 3;
+
+        /// <summary>
+        /// The maximum number of times you can reset BBM using GG, each week.
+        /// </summary>
+        [DefaultValue(_BBMWeeklyGGResets)]
+        public uint BBMWeeklyGGResets
+        {
+            set
+            {
+                SetSetting("BBMWeeklyGGResets", value);
+            }
+            get
+            {
+                return TryGetSetting("BBMWeeklyGGResets", _BBMWeeklyGGResets);
+            }
+        }
+        private const uint _BBMWeeklyGGResets = 6;
     }
 }

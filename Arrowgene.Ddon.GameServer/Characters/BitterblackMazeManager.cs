@@ -148,11 +148,7 @@ namespace Arrowgene.Ddon.GameServer.Characters
             // TODO: Is there a reason we wouldn't get a reward here?
             var (gold, silver, red) = GetMarksForStage(server.AssetRepository.BitterblackMazeAsset, stageId);
 
-            if (rewards.TryGetValue(stageId.Id, out var existingReward))
-            {
-                // The reward has already been applied or redeemed.
-            }
-            else
+            if (!rewards.TryGetValue(stageId.Id, out var existingReward))
             {
                 server.Database.InsertBBMRewards(character.CharacterId, gold, silver, red, stageId.Id, connectionIn);
             }
